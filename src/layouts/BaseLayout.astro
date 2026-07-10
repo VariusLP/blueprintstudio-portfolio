@@ -3,6 +3,7 @@ import '../styles/global.css';
 import AmbientBackground from '../components/AmbientBackground.astro';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
+import { withBase } from '../utils/url';
 
 interface Props {
   title: string;
@@ -31,7 +32,7 @@ const pageTitle = title === 'BlueprintStudio' ? title : `${title} – BlueprintS
     <meta name="description" content={description} />
     <meta name="color-scheme" content="dark" />
     <title>{pageTitle}</title>
-    <link rel="icon" href={`${import.meta.env.BASE_URL}favicon.svg`} type="image/svg+xml" />
+    <link rel="icon" href={withBase('favicon.svg')} type="image/svg+xml" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   </head>

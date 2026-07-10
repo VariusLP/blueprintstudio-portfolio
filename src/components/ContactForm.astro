@@ -1,8 +1,35 @@
 ---
-import { contactEmail } from '../data/site';
+import { contactEmail, web3formsAccessKey } from '../data/site';
+import { withBase } from '../utils/url';
+
+const formConfigured = web3formsAccessKey.length > 0;
+const redirectUrl = new URL(withBase('/kontakt?sent=1'), Astro.url.origin).href;
 ---
 
-<form id="contact-form" class="space-y-5">
+<form
+  id="contact-form"
+  class="space-y-5"
+  action={formConfigured ? 'https://api.web3forms.com/submit' : undefined}
+  method={formConfigured ? 'POST' : undefined}
+>
+  {formConfigured && (
+    <>
+      <input type="hidden" name="access_key" value={web3formsAccessKey} />
+      <input type="hidden" name="subject" value="Anfrage BlueprintStudio" />
+      <input type="hidden" name="from_name" value="BlueprintStudio Kontaktformular" />
+      <input type="hidden" name="redirect" value={redirectUrl} />
+    </>
+  )}
+
+  <input
+    type="checkbox"
+    name="botcheck"
+    class="hidden"
+    tabindex="-1"
+    autocomplete="off"
+    aria-hidden="true"
+  />
+
   <div>
     <label for="name" class="accent-label">Name</label>
     <input id="name" name="name" type="text" required class="form-input mt-2" />
@@ -18,29 +45,122 @@ import { contactEmail } from '../data/site';
     <textarea id="message" name="message" rows="6" required class="form-input mt-2 resize-y"></textarea>
   </div>
 
-  <button type="submit" class="btn-ghost">Nachricht senden</button>
+  <p
+    id="form-status"
+    class="hidden text-sm font-light"
+    role="status"
+    aria-live="polite"
+  ></p>
+
+  <button type="submit" id="submit-btn" class="btn-ghost">Nachricht senden</button>
+
   <p class="text-xs font-light text-neutral-600">
-    Öffnet dein E-Mail-Programm (z.&nbsp;B. Outlook) mit ausgefüllter Nachricht an {contactEmail}.
-    Dort auf „Senden“ klicken, um die Anfrage abzuschicken.
+  {
+    formConfigured
+      ? 'Die Nachricht wird direkt per E-Mail zugestellt — ohne Outlook oder anderes E-Mail-Programm.'
+      : `Formular-Backend noch nicht konfiguriert. Schreib direkt an ${contactEmail}.`
+  }
   </p>
 </form>
 
-<script define:vars={{ contactEmail }}>
+<script
+  is:inline
+  define:vars={{ contactEmail, web3formsAccessKey, formConfigured, redirectUrl }}
+>
   const form = document.getElementById('contact-form');
+  const statusEl = document.getElementById('form-status');
+  const submitBtn = document.getElementById('submit-btn');
 
-  form?.addEventListener('submit', (event) => {
-    event.preventDefault();
+  function showStatus(message, type) {
+    if (!statusEl) return;
+    statusEl.textContent = message;
+    statusEl.classList.remove('hidden', 'text-cyan-300/90', 'text-red-400/90', 'text-amber-300/90');
+    if (type === 'success') statusEl.classList.add('text-cyan-300/90');
+    else if (type === 'error') statusEl.classList.add('text-red-400/90');
+    else statusEl.classList.add('text-amber-300/90');
+  }
 
+  function openMailto() {
     const data = new FormData(form);
     const name = String(data.get('name') ?? '').trim();
     const email = String(data.get('email') ?? '').trim();
     const message = String(data.get('message') ?? '').trim();
-
     const subject = encodeURIComponent('Anfrage BlueprintStudio');
-    const body = encodeURIComponent(
-      `Name: ${name}\nAntwort an: ${email}\n\n${message}`,
-    );
+    const body = encodeURIComponent(`Name: ${name}\nAntwort an: ${email}\n\n${message}`);
+    const link = document.createElement('a');
+    link.href = `mailto:${contactEmail}?subject=${subject}&body=${body}`;
+    link.style.display = 'none';
+    document.body.appendChild(link);
+    link.click();
+    link.remove();
+  }
 
-    window.location.href = `mailto:${contactEmail}?subject=${subject}&body=${body}`;
+  if (new URLSearchParams(window.location.search).get('sent') === '1') {
+    showStatus('Nachricht gesendet! Ich melde mich in der Regel innerhalb von 48 Stunden.', 'success');
+    window.history.replaceState({}, '', window.location.pathname);
+  }
+
+  form?.addEventListener('submit', async (event) => {
+    if (!formConfigured) {
+      event.preventDefault();
+      showStatus(
+        `Direktversand nicht eingerichtet. E-Mail-Programm wird geöffnet — oder schreib an ${contactEmail}.`,
+        'warning',
+      );
+      openMailto();
+      return;
+    }
+
+    event.preventDefault();
+
+    const data = new FormData(form);
+    const payload = {
+      access_key: web3formsAccessKey,
+      name: String(data.get('name') ?? '').trim(),
+      email: String(data.get('email') ?? '').trim(),
+      message: String(data.get('message') ?? '').trim(),
+      subject: 'Anfrage BlueprintStudio',
+      from_name: 'BlueprintStudio Kontaktformular',
+      botcheck: data.get('botcheck'),
+    };
+
+    if (submitBtn) {
+      submitBtn.disabled = true;
+      submitBtn.textContent = 'Wird gesendet…';
+    }
+
+    try {
+      const response = await fetch('https://api.web3forms.com/submit', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          Accept: 'application/json',
+        },
+        body: JSON.stringify(payload),
+      });
+
+      const result = await response.json();
+
+      if (!response.ok || !result.success) {
+        throw new Error(result.message || 'Unbekannter Fehler');
+      }
+
+      showStatus(
+        'Nachricht gesendet! Ich melde mich in der Regel innerhalb von 48 Stunden.',
+        'success',
+      );
+      form.reset();
+    } catch {
+      showStatus(
+        `Senden fehlgeschlagen. E-Mail-Programm wird als Fallback geöffnet — oder schreib an ${contactEmail}.`,
+        'error',
+      );
+      openMailto();
+    } finally {
+      if (submitBtn) {
+        submitBtn.disabled = false;
+        submitBtn.textContent = 'Nachricht senden';
+      }
+    }
   });
 </script>

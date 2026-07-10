@@ -20,6 +20,10 @@ export const nav: NavItem[] = [
 ];
 
 export const contactEmail = 'saschaleitner1@gmx.at';
+
+/** Öffentlicher Zugangsschlüssel von https://web3forms.com */
+export const web3formsAccessKey =
+  import.meta.env.PUBLIC_WEB3FORMS_ACCESS_KEY ?? 'c2917d1f-e707-466a-8f8b-0e210b09be2b';
 export const githubUrl = 'https://github.com/VariusLP';
 export const githubHandle = 'VariusLP';
 
