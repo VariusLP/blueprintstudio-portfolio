@@ -151,8 +151,8 @@
     @apply rounded-lg transition-opacity duration-200 hover:opacity-90;
   }
 
-  .brand-link[aria-current='page'] .brand-banner {
-    @apply opacity-100 drop-shadow-[0_0_12px_rgba(34,211,238,0.25)];
+  .brand-asset {
+    @apply block;
   }
 }
 

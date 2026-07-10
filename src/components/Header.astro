@@ -32,17 +32,21 @@ const mobileLinkClass = (active: boolean) =>
   <div class="mx-auto flex max-w-7xl items-center justify-between gap-4 px-4 py-4 sm:px-8 sm:py-5">
     <a
       href={withBase('/')}
-      class="brand-link shrink-0"
+      class="brand-link inline-flex shrink-0 items-center gap-2.5"
       aria-current={isActive('/') ? 'page' : undefined}
     >
       <img
-        src={withBase('banner.png')}
-        alt="BlueprintStudio"
-        class="brand-banner h-8 w-auto sm:h-9"
-        width="320"
-        height="80"
+        src={withBase('logo.png')}
+        alt=""
+        class="brand-asset h-9 w-9"
+        width="36"
+        height="36"
         decoding="async"
+        aria-hidden="true"
       />
+      <span class="brand-wordmark text-sm font-extrabold tracking-tight sm:text-base">
+        <span class="text-white">Blueprint</span><span class="text-[#3b82f6]">Studio</span>
+      </span>
     </a>
 
     <!-- Desktop-Navigation (ab lg / Tablet quer & Desktop) -->
