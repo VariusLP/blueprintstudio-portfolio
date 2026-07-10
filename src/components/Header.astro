@@ -13,6 +13,10 @@ function isActive(href: string) {
   if (normalized === '/') return currentPath === '/' || currentPath === '';
   return currentPath === normalized || currentPath.startsWith(`${normalized}/`);
 }
+
+function isDocsActive() {
+  return currentPath.startsWith('/docs');
+}
 ---
 
 <header class="fixed inset-x-0 top-0 z-50 border-b border-white/[0.06] bg-[#030308]/70 backdrop-blur-xl">
@@ -27,24 +31,63 @@ function isActive(href: string) {
       BlueprintStudio
     </a>
     <nav aria-label="Hauptnavigation">
-      <ul class="flex flex-wrap justify-end gap-x-6 gap-y-2 sm:gap-x-8">
+      <ul class="flex flex-wrap items-center justify-end gap-x-5 gap-y-2 sm:gap-x-6">
         {
-          nav.map((item) => (
-            <li>
-              <a
-                href={withBase(item.href)}
-                class:list={[
-                  'text-sm font-light transition-colors',
-                  isActive(item.href)
-                    ? 'text-cyan-300/90'
-                    : 'text-neutral-500 hover:text-cyan-300/90',
-                ]}
-                aria-current={isActive(item.href) ? 'page' : undefined}
-              >
-                {item.label}
-              </a>
-            </li>
-          ))
+          nav.map((item) =>
+            item.children ? (
+              <li class="group relative">
+                <a
+                  href={withBase(item.href)}
+                  class:list={[
+                    'text-sm font-light transition-colors',
+                    isDocsActive()
+                      ? 'text-cyan-300/90'
+                      : 'text-neutral-500 hover:text-cyan-300/90',
+                  ]}
+                  aria-current={isDocsActive() ? 'page' : undefined}
+                >
+                  {item.label}
+                </a>
+                <ul
+                  class="invisible absolute right-0 top-full z-50 mt-2 min-w-[11rem] rounded-xl border border-white/10 bg-[#0a0a12]/95 py-2 opacity-0 backdrop-blur-xl transition-[opacity,visibility] duration-150 group-hover:visible group-hover:opacity-100 group-focus-within:visible group-focus-within:opacity-100"
+                  role="list"
+                >
+                  {
+                    item.children.map((child) => (
+                      <li>
+                        <a
+                          href={withBase(child.href)}
+                          class:list={[
+                            'block px-4 py-2 text-sm font-light transition-colors',
+                            isActive(child.href)
+                              ? 'text-cyan-300/90'
+                              : 'text-neutral-400 hover:text-white',
+                          ]}
+                        >
+                          {child.label}
+                        </a>
+                      </li>
+                    ))
+                  }
+                </ul>
+              </li>
+            ) : (
+              <li>
+                <a
+                  href={withBase(item.href)}
+                  class:list={[
+                    'text-sm font-light transition-colors',
+                    isActive(item.href)
+                      ? 'text-cyan-300/90'
+                      : 'text-neutral-500 hover:text-cyan-300/90',
+                  ]}
+                  aria-current={isActive(item.href) ? 'page' : undefined}
+                >
+                  {item.label}
+                </a>
+              </li>
+            ),
+          )
         }
       </ul>
     </nav>

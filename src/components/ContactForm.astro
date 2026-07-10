@@ -1,0 +1,42 @@
+---
+import { contactEmail } from '../data/site';
+
+const successUrl = new URL('kontakt?gesendet=1', Astro.site + import.meta.env.BASE_URL).href;
+---
+
+<form
+  action={`https://formsubmit.co/${contactEmail}`}
+  method="POST"
+  class="space-y-5"
+>
+  <input type="hidden" name="_subject" value="Neue Anfrage — BlueprintStudio" />
+  <input type="hidden" name="_captcha" value="false" />
+  <input type="hidden" name="_template" value="table" />
+  <input type="text" name="_honey" class="hidden" tabindex="-1" autocomplete="off" />
+  <input
+    type="hidden"
+    name="_next"
+    value={successUrl}
+  />
+
+  <div>
+    <label for="name" class="accent-label">Name</label>
+    <input id="name" name="name" type="text" required class="form-input mt-2" />
+  </div>
+
+  <div>
+    <label for="email" class="accent-label">E-Mail</label>
+    <input id="email" name="email" type="email" required class="form-input mt-2" />
+  </div>
+
+  <div>
+    <label for="message" class="accent-label">Nachricht</label>
+    <textarea id="message" name="message" rows="6" required class="form-input mt-2 resize-y"></textarea>
+  </div>
+
+  <button type="submit" class="btn-ghost">Nachricht senden</button>
+  <p class="text-xs font-light text-neutral-600">
+    Nachricht wird per E-Mail an {contactEmail} gesendet. Beim ersten Mal muss FormSubmit die
+    Adresse einmalig bestätigen.
+  </p>
+</form>

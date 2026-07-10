@@ -1,0 +1,47 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import ContactForm from '../components/ContactForm.astro';
+import { contactEmail } from '../data/site';
+
+const sent = Astro.url.searchParams.get('gesendet') === '1';
+---
+
+<BaseLayout title="Kontakt" description="Kontakt zu BlueprintStudio — Projektanfragen und technische Fragen.">
+  <section class="px-6 pb-28 pt-32 sm:px-8" aria-labelledby="contact-title">
+    <div class="mx-auto grid max-w-7xl grid-cols-1 gap-16 lg:grid-cols-2 lg:gap-20">
+      <div>
+        <p class="accent-label mb-4">Anfrage</p>
+        <h1 id="contact-title" class="section-title">Kontakt</h1>
+        <p class="mt-6 max-w-md text-sm font-light leading-relaxed text-neutral-400">
+          Technische Anfragen zu Unity-Projekten, Assets oder Zusammenarbeit.
+          Das Formular sendet direkt an meine geschäftliche E-Mail.
+        </p>
+        <dl class="mt-10 space-y-4 text-sm font-light text-neutral-500">
+          <div>
+            <dt class="accent-label">E-Mail</dt>
+            <dd class="mt-1">
+              <a href={`mailto:${contactEmail}`} class="text-neutral-300 hover:text-cyan-300/90">
+                {contactEmail}
+              </a>
+            </dd>
+          </div>
+          <div>
+            <dt class="accent-label">Antwortzeit</dt>
+            <dd class="mt-1 text-neutral-400">In der Regel innerhalb von 48 Stunden</dd>
+          </div>
+        </dl>
+      </div>
+
+      <div class="bento-cell">
+        {
+          sent && (
+            <p class="mb-6 rounded-lg border border-cyan-500/20 bg-cyan-500/5 px-4 py-3 text-sm font-light text-cyan-300/90">
+              Nachricht gesendet. Ich melde mich so bald wie möglich.
+            </p>
+          )
+        }
+        <ContactForm />
+      </div>
+    </div>
+  </section>
+</BaseLayout>

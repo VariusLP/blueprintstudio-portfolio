@@ -1,0 +1,45 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { about, studio, githubUrl } from '../data/site';
+import { withBase } from '../utils/url';
+---
+
+<BaseLayout title="Über mich" description="Sascha Leitner — Softwareentwickler, SAE-Absolvent, Fokus auf Unity, Performance und Automatisierung.">
+  <section class="px-6 pb-28 pt-32 sm:px-8" aria-labelledby="about-title">
+    <div class="mx-auto max-w-3xl">
+      <p class="accent-label mb-4">BlueprintStudio</p>
+      <h1 id="about-title" class="section-title">{studio.owner}</h1>
+      <p class="mt-8 text-base font-light leading-relaxed text-neutral-400">{about.summary}</p>
+
+      <div class="mt-16 space-y-12">
+        <article>
+          <h2 class="accent-label mb-4">Ausbildung</h2>
+          <p class="text-sm font-light text-neutral-300">{about.education}</p>
+        </article>
+
+        <article>
+          <h2 class="accent-label mb-4">Technischer Fokus</h2>
+          <ul class="detail-list" role="list">
+            {about.focus.map((item) => (
+              <li>{item}</li>
+            ))}
+          </ul>
+        </article>
+
+        <article class="bento-cell">
+          <h2 class="accent-label mb-4">Arbeitsweise</h2>
+          <p class="text-sm font-light leading-relaxed text-neutral-500">
+            Performance-Messung vor Optimierung. Automatisierung dort, wo manuelle Schritte
+            Fehler provozieren. Klare Modulgrenzen und dokumentierter Code — besonders bei
+            wachsenden Unity-Codebases und paralleler Team-Entwicklung.
+          </p>
+        </article>
+      </div>
+
+      <div class="mt-16 flex flex-wrap gap-4">
+        <a href={githubUrl} class="btn-ghost" rel="noopener noreferrer">GitHub</a>
+        <a href={withBase('/kontakt')} class="btn-ghost">Kontakt</a>
+      </div>
+    </div>
+  </section>
+</BaseLayout>
