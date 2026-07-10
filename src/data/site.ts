@@ -68,7 +68,7 @@ export const about = {
   ],
   focus: [
     'Unity & Unreal Engine — Applikationen, Tools und Prototypen',
-    'C#, C++ und .NET Framework',
+    'C#, C++, Python, JavaScript & mehr — KI-gestützte Adaption weiterer Sprachen',
     'KI-gestützte Skripterstellung und strukturierte Feature-Integration',
     'Meilenstein-Planung, Projektdokumentation und transparente Kommunikation',
   ],
