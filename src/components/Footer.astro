@@ -1,17 +1,25 @@
 ---
-import { impressum, contactEmail, nav } from '../data/site';
+import { contactEmail, impressumData } from '../data/config';
+import { getLegalPath, getTranslations, type Lang } from '../i18n';
 import { withBase } from '../utils/url';
 
+interface Props {
+  lang: Lang;
+}
+
+const { lang } = Astro.props;
+const t = getTranslations(lang);
 const year = new Date().getFullYear();
+const country = lang === 'de' ? impressumData.countryDe : impressumData.countryEn;
 ---
 
 <footer class="border-t border-white/[0.06] px-4 py-16 pb-[max(4rem,env(safe-area-inset-bottom))] sm:px-8 sm:py-20">
   <div class="mx-auto grid max-w-7xl grid-cols-1 gap-12 lg:grid-cols-3 lg:gap-16">
     <div>
-      <p class="accent-label">Navigation</p>
+      <p class="accent-label">{t.footer.navigation}</p>
       <ul class="mt-4 space-y-2 text-sm font-light">
         {
-          nav.map((item) => (
+          t.nav.map((item) => (
             <li>
               <a href={withBase(item.href)} class="text-neutral-500 hover:text-cyan-300/90">
                 {item.label}
@@ -20,24 +28,24 @@ const year = new Date().getFullYear();
           ))
         }
         <li>
-          <a href={withBase('/impressum')} class="text-neutral-500 hover:text-cyan-300/90">
-            Impressum
+          <a href={withBase(getLegalPath(lang))} class="text-neutral-500 hover:text-cyan-300/90">
+            {t.footer.legalLink}
           </a>
         </li>
       </ul>
     </div>
     <div>
-      <p class="accent-label">Impressum</p>
+      <p class="accent-label">{t.footer.legal}</p>
       <address class="mt-3 not-italic text-sm font-light leading-relaxed text-neutral-500">
-        {impressum.owner}<br />
-        {impressum.tradeName}<br />
-        {impressum.street}<br />
-        {impressum.zip} {impressum.city}, {impressum.country}<br />
+        {impressumData.owner}<br />
+        {impressumData.tradeName}<br />
+        {impressumData.street}<br />
+        {impressumData.zip} {impressumData.city}, {country}<br />
         <a href={`mailto:${contactEmail}`} class="hover:text-cyan-300/90">{contactEmail}</a>
       </address>
     </div>
     <div>
-      <a href={withBase('/')} class="inline-flex items-center gap-3">
+      <a href={withBase(lang === 'de' ? '/' : '/en')} class="inline-flex items-center gap-3">
         <img
           src={withBase('logo.png')}
           alt=""
@@ -49,9 +57,9 @@ const year = new Date().getFullYear();
         <span class="text-sm font-extrabold text-white">BlueprintStudio</span>
       </a>
       <p class="mt-3 text-sm font-light leading-relaxed text-neutral-500">
-        Full-Cycle Software &amp; Solutions.
+        {t.footer.tagline}
       </p>
-      <p class="mt-8 text-xs font-light text-neutral-700">&copy; {year} {impressum.owner}</p>
+      <p class="mt-8 text-xs font-light text-neutral-700">&copy; {year} {impressumData.owner}</p>
     </div>
   </div>
 </footer>

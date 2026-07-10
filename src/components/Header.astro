@@ -1,21 +1,28 @@
 ---
-import { nav } from '../data/site';
+import LanguageSwitcher from './LanguageSwitcher.astro';
+import { getHomePath, getTranslations, type Lang } from '../i18n';
 import { withBase } from '../utils/url';
 
 interface Props {
   currentPath: string;
+  lang: Lang;
 }
 
-const { currentPath } = Astro.props;
+const { currentPath, lang } = Astro.props;
+const t = getTranslations(lang);
+const nav = t.nav;
+const homePath = getHomePath(lang);
 
 function isActive(href: string) {
-  const normalized = href === '/' ? '/' : href.replace(/\/$/, '');
-  if (normalized === '/') return currentPath === '/' || currentPath === '';
-  return currentPath === normalized || currentPath.startsWith(`${normalized}/`);
+  const normalized = href.replace(/\/$/, '') || (lang === 'en' ? '/en' : '/');
+  const path = currentPath.replace(/\/$/, '') || (lang === 'en' ? '/en' : '/');
+  if (normalized === homePath) return path === homePath;
+  return path === normalized || path.startsWith(`${normalized}/`);
 }
 
 function isDocsActive() {
-  return currentPath.startsWith('/docs');
+  const docsBase = lang === 'de' ? '/docs' : '/en/docs';
+  return currentPath.startsWith(docsBase);
 }
 
 const linkClass = (active: boolean) =>
@@ -23,6 +30,8 @@ const linkClass = (active: boolean) =>
 
 const mobileLinkClass = (active: boolean) =>
   active ? 'text-cyan-300/90' : 'text-neutral-300';
+
+const docsOverviewPath = lang === 'de' ? '/docs' : '/en/docs';
 ---
 
 <header
@@ -31,9 +40,9 @@ const mobileLinkClass = (active: boolean) =>
 >
   <div class="mx-auto flex max-w-7xl items-center justify-between gap-4 px-4 py-4 sm:px-8 sm:py-5">
     <a
-      href={withBase('/')}
+      href={withBase(homePath)}
       class="brand-link inline-flex shrink-0 items-center gap-2.5"
-      aria-current={isActive('/') ? 'page' : undefined}
+      aria-current={isActive(homePath) ? 'page' : undefined}
     >
       <img
         src={withBase('logo.png')}
@@ -49,88 +58,82 @@ const mobileLinkClass = (active: boolean) =>
       </span>
     </a>
 
-    <!-- Desktop-Navigation (ab lg / Tablet quer & Desktop) -->
-    <nav class="hidden lg:block" aria-label="Hauptnavigation">
-      <ul class="flex items-center justify-end gap-x-6">
-        {
-          nav.map((item) =>
-            item.children ? (
-              <li class="group relative">
-                <a
-                  href={withBase(item.href)}
-                  class:list={[
-                    'text-sm font-light transition-colors',
-                    linkClass(isDocsActive()),
-                  ]}
-                  aria-current={isDocsActive() ? 'page' : undefined}
-                >
-                  {item.label}
-                </a>
-                <ul
-                  class="invisible absolute right-0 top-full z-50 mt-2 min-w-[11rem] rounded-xl border border-white/10 bg-[#0a0a12]/95 py-2 opacity-0 backdrop-blur-xl transition-[opacity,visibility] duration-150 group-hover:visible group-hover:opacity-100 group-focus-within:visible group-focus-within:opacity-100"
-                  role="list"
-                >
-                  {
-                    item.children.map((child) => (
-                      <li>
-                        <a
-                          href={withBase(child.href)}
-                          class:list={[
-                            'block px-4 py-2.5 text-sm font-light transition-colors',
-                            isActive(child.href)
-                              ? 'text-cyan-300/90'
-                              : 'text-neutral-400 hover:text-white',
-                          ]}
-                        >
-                          {child.label}
-                        </a>
-                      </li>
-                    ))
-                  }
-                </ul>
-              </li>
-            ) : (
-              <li>
-                <a
-                  href={withBase(item.href)}
-                  class:list={[
-                    'text-sm font-light transition-colors',
-                    linkClass(isActive(item.href)),
-                  ]}
-                  aria-current={isActive(item.href) ? 'page' : undefined}
-                >
-                  {item.label}
-                </a>
-              </li>
-            ),
-          )
-        }
-      </ul>
-    </nav>
+    <div class="hidden items-center gap-6 lg:flex">
+      <nav aria-label={t.ui.navMain}>
+        <ul class="flex items-center justify-end gap-x-6">
+          {
+            nav.map((item) =>
+              item.children ? (
+                <li class="group relative">
+                  <a
+                    href={withBase(item.href)}
+                    class:list={['text-sm font-light transition-colors', linkClass(isDocsActive())]}
+                    aria-current={isDocsActive() ? 'page' : undefined}
+                  >
+                    {item.label}
+                  </a>
+                  <ul
+                    class="invisible absolute right-0 top-full z-50 mt-2 min-w-[11rem] rounded-xl border border-white/10 bg-[#0a0a12]/95 py-2 opacity-0 backdrop-blur-xl transition-[opacity,visibility] duration-150 group-hover:visible group-hover:opacity-100 group-focus-within:visible group-focus-within:opacity-100"
+                    role="list"
+                  >
+                    {
+                      item.children.map((child) => (
+                        <li>
+                          <a
+                            href={withBase(child.href)}
+                            class:list={[
+                              'block px-4 py-2.5 text-sm font-light transition-colors',
+                              isActive(child.href)
+                                ? 'text-cyan-300/90'
+                                : 'text-neutral-400 hover:text-white',
+                            ]}
+                          >
+                            {child.label}
+                          </a>
+                        </li>
+                      ))
+                    }
+                  </ul>
+                </li>
+              ) : (
+                <li>
+                  <a
+                    href={withBase(item.href)}
+                    class:list={['text-sm font-light transition-colors', linkClass(isActive(item.href))]}
+                    aria-current={isActive(item.href) ? 'page' : undefined}
+                  >
+                    {item.label}
+                  </a>
+                </li>
+              ),
+            )
+          }
+        </ul>
+      </nav>
+      <LanguageSwitcher currentPath={currentPath} lang={lang} />
+    </div>
 
-    <!-- Hamburger (Handy & Tablet hochkant) -->
-    <button
-      type="button"
-      id="nav-toggle"
-      class="nav-toggle lg:hidden"
-      aria-expanded="false"
-      aria-controls="mobile-nav"
-      aria-label="Menü öffnen"
-    >
-      <span class="nav-toggle-bar" aria-hidden="true"></span>
-      <span class="nav-toggle-bar" aria-hidden="true"></span>
-      <span class="nav-toggle-bar" aria-hidden="true"></span>
-    </button>
+    <div class="flex items-center gap-3 lg:hidden">
+      <LanguageSwitcher currentPath={currentPath} lang={lang} />
+      <button
+        type="button"
+        id="nav-toggle"
+        class="nav-toggle"
+        aria-expanded="false"
+        aria-controls="mobile-nav"
+        aria-label={t.ui.menuOpen}
+        data-label-open={t.ui.menuOpen}
+        data-label-close={t.ui.menuClose}
+      >
+        <span class="nav-toggle-bar" aria-hidden="true"></span>
+        <span class="nav-toggle-bar" aria-hidden="true"></span>
+        <span class="nav-toggle-bar" aria-hidden="true"></span>
+      </button>
+    </div>
   </div>
 
-  <!-- Mobile-Menü -->
-  <div
-    id="mobile-nav"
-    class="mobile-nav-panel lg:hidden"
-    hidden
-    aria-hidden="true"
-  >
-    <nav aria-label="Mobile Navigation">
+  <div id="mobile-nav" class="mobile-nav-panel lg:hidden" hidden aria-hidden="true">
+    <nav aria-label={t.ui.navMobile}>
       <ul class="space-y-1 px-4 pb-6 sm:px-8" role="list">
         {
           nav.map((item) =>
@@ -161,13 +164,13 @@ const mobileLinkClass = (active: boolean) =>
                   <ul class="mb-2 ml-3 space-y-1 border-l border-white/10 pl-4" role="list">
                     <li>
                       <a
-                        href={withBase(item.href)}
+                        href={withBase(docsOverviewPath)}
                         class:list={[
                           'mobile-nav-sublink block',
-                          mobileLinkClass(currentPath === '/docs' || currentPath === '/docs/'),
+                          mobileLinkClass(currentPath === docsOverviewPath),
                         ]}
                       >
-                        Übersicht
+                        {t.ui.docsOverview}
                       </a>
                     </li>
                     {
@@ -205,17 +208,18 @@ const mobileLinkClass = (active: boolean) =>
 
 <script is:inline>
   (function () {
-    const header = document.getElementById('site-header');
     const toggle = document.getElementById('nav-toggle');
     const panel = document.getElementById('mobile-nav');
-    if (!header || !toggle || !panel) return;
+    if (!toggle || !panel) return;
 
     let isOpen = false;
+    const labelOpen = toggle.getAttribute('data-label-open') || 'Open menu';
+    const labelClose = toggle.getAttribute('data-label-close') || 'Close menu';
 
     function setOpen(open) {
       isOpen = open;
       toggle.setAttribute('aria-expanded', String(open));
-      toggle.setAttribute('aria-label', open ? 'Menü schließen' : 'Menü öffnen');
+      toggle.setAttribute('aria-label', open ? labelClose : labelOpen);
       toggle.classList.toggle('is-open', open);
       panel.hidden = !open;
       panel.setAttribute('aria-hidden', String(!open));
@@ -223,15 +227,10 @@ const mobileLinkClass = (active: boolean) =>
     }
 
     toggle.addEventListener('click', () => setOpen(!isOpen));
-
-    panel.querySelectorAll('a').forEach((link) => {
-      link.addEventListener('click', () => setOpen(false));
-    });
-
+    panel.querySelectorAll('a').forEach((link) => link.addEventListener('click', () => setOpen(false)));
     document.addEventListener('keydown', (event) => {
       if (event.key === 'Escape' && isOpen) setOpen(false);
     });
-
     window.matchMedia('(min-width: 1024px)').addEventListener('change', (event) => {
       if (event.matches && isOpen) setOpen(false);
     });

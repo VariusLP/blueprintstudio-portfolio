@@ -1,10 +1,5 @@
 ---
-/**
- * Cookie-freie Webanalyse über Umami (https://umami.is).
- * Aktiv, sobald `umamiWebsiteId` in site.ts gesetzt ist.
- * Dashboard nur mit deinem Umami-Login sichtbar — Besucher sehen nichts davon.
- */
-import { umamiWebsiteId, umamiScriptUrl } from '../data/site';
+import { umamiWebsiteId, umamiScriptUrl } from '../data/config';
 
 const enabled = umamiWebsiteId.length > 0;
 ---

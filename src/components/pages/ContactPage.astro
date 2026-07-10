@@ -1,0 +1,43 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import ContactForm from '../ContactForm.astro';
+import { contactEmail } from '../../data/config';
+import { getTranslations, type Lang } from '../../i18n';
+
+interface Props {
+  lang: Lang;
+}
+
+const { lang } = Astro.props;
+const t = getTranslations(lang);
+const p = t.contactPage;
+---
+
+<BaseLayout title={p.title} description={p.description} lang={lang}>
+  <section class="px-4 pb-24 pt-28 sm:px-8 sm:pb-28 sm:pt-32" aria-labelledby="contact-title">
+    <div class="mx-auto grid max-w-7xl grid-cols-1 gap-10 lg:grid-cols-2 lg:gap-20">
+      <div>
+        <p class="accent-label mb-4">{p.label}</p>
+        <h1 id="contact-title" class="section-title">{p.heading}</h1>
+        <p class="mt-6 max-w-md text-sm font-light leading-relaxed text-neutral-400">{p.intro}</p>
+        <dl class="mt-10 space-y-4 text-sm font-light text-neutral-500">
+          <div>
+            <dt class="accent-label">{p.emailLabel}</dt>
+            <dd class="mt-1">
+              <a href={`mailto:${contactEmail}`} class="text-neutral-300 hover:text-cyan-300/90">
+                {contactEmail}
+              </a>
+            </dd>
+          </div>
+          <div>
+            <dt class="accent-label">{p.responseLabel}</dt>
+            <dd class="mt-1 text-neutral-400">{p.responseText}</dd>
+          </div>
+        </dl>
+      </div>
+      <div class="bento-cell">
+        <ContactForm lang={lang} />
+      </div>
+    </div>
+  </section>
+</BaseLayout>

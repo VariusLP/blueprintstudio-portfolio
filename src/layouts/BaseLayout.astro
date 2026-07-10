@@ -4,16 +4,19 @@ import AmbientBackground from '../components/AmbientBackground.astro';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
 import Analytics from '../components/Analytics.astro';
+import { getAlternatePath, getLangFromPath, getTranslations, type Lang } from '../i18n';
 import { withBase } from '../utils/url';
 
 interface Props {
   title: string;
   description?: string;
+  lang?: Lang;
 }
 
 const {
   title,
-  description = 'BlueprintStudio — Full-Cycle Software & Solutions Development. Unity-Tools, maßgeschneiderte Software und Asset-Store-Produkte von Sascha Leitner.',
+  description,
+  lang: langProp,
 } = Astro.props;
 
 const base = import.meta.env.BASE_URL.replace(/\/$/, '');
@@ -22,23 +25,39 @@ if (base && currentPath.startsWith(base)) {
   currentPath = currentPath.slice(base.length) || '/';
 }
 if (!currentPath.startsWith('/')) currentPath = `/${currentPath}`;
-const pageTitle = title === 'BlueprintStudio' ? title : `${title} – BlueprintStudio`;
+
+const lang = langProp ?? getLangFromPath(currentPath);
+const t = getTranslations(lang);
+const metaDescription = description ?? t.meta.defaultDescription;
+const pageTitle = title === t.meta.siteTitle ? title : `${title} – ${t.meta.siteTitle}`;
+
+const siteOrigin = Astro.site?.origin ?? 'https://blueprintstudio.at';
+const alternatePath = getAlternatePath(currentPath);
+const dePath = lang === 'de' ? currentPath : alternatePath;
+const enPath = lang === 'en' ? currentPath : alternatePath;
+const deHref = new URL(withBase(dePath), siteOrigin).href;
+const enHref = new URL(withBase(enPath), siteOrigin).href;
+const xDefaultHref = new URL(withBase('/'), siteOrigin).href;
 ---
 
 <!doctype html>
-<html lang="de">
+<html lang={lang}>
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
-    <meta name="description" content={description} />
+    <meta name="description" content={metaDescription} />
     <meta name="color-scheme" content="dark" />
     <meta property="og:type" content="website" />
-    <meta property="og:image" content={new URL(withBase('banner.png'), Astro.site).href} />
+    <meta property="og:image" content={new URL(withBase('banner.png'), siteOrigin).href} />
     <meta property="og:title" content={pageTitle} />
-    <meta property="og:description" content={description} />
+    <meta property="og:description" content={metaDescription} />
+    <meta property="og:locale" content={lang === 'de' ? 'de_AT' : 'en_US'} />
     <title>{pageTitle}</title>
     <link rel="icon" href={withBase('logo.png')} type="image/png" />
     <link rel="apple-touch-icon" href={withBase('logo.png')} />
+    <link rel="alternate" hreflang="x-default" href={xDefaultHref} />
+    <link rel="alternate" hreflang="de" href={deHref} />
+    <link rel="alternate" hreflang="en" href={enHref} />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   </head>
@@ -50,16 +69,16 @@ const pageTitle = title === 'BlueprintStudio' ? title : `${title} – BlueprintS
       href="#main"
       class="sr-only focus:not-sr-only focus:fixed focus:left-8 focus:top-8 focus:z-50 focus:rounded-full focus:border focus:border-white/20 focus:px-4 focus:py-2 focus:text-sm focus:text-white"
     >
-      Zum Inhalt springen
+      {t.meta.skipToContent}
     </a>
 
-    <Header currentPath={currentPath} />
+    <Header currentPath={currentPath} lang={lang} />
 
     <main id="main" class="relative">
       <slot />
     </main>
 
-    <Footer />
+    <Footer lang={lang} />
     <Analytics />
   </body>
 </html>

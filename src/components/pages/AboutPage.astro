@@ -1,0 +1,73 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { githubUrl } from '../../data/config';
+import { getTranslations, type Lang } from '../../i18n';
+import { withBase } from '../../utils/url';
+
+interface Props {
+  lang: Lang;
+}
+
+const { lang } = Astro.props;
+const t = getTranslations(lang);
+const a = t.about;
+const contactPath = lang === 'de' ? '/kontakt' : '/en/contact';
+---
+
+<BaseLayout title={a.pageTitle} description={a.pageDescription} lang={lang}>
+  <section class="px-4 pb-24 pt-28 sm:px-8 sm:pb-28 sm:pt-32" aria-labelledby="about-title">
+    <div class="mx-auto max-w-3xl">
+      <p class="accent-label mb-4">{a.label}</p>
+      <h1 id="about-title" class="section-title">{t.studio.owner}</h1>
+      <p class="mt-4 text-sm font-light text-cyan-300/80">{t.studio.role}</p>
+      <p class="mt-8 text-base font-light leading-relaxed text-neutral-400">{a.summary}</p>
+      <p class="mt-6 text-sm font-light leading-relaxed text-neutral-500">{a.scope}</p>
+
+      <div class="mt-16 space-y-12">
+        <article>
+          <h2 class="accent-label mb-4">{a.educationTitle}</h2>
+          <ul class="detail-list" role="list">
+            {a.education.map((item) => (
+              <li>{item}</li>
+            ))}
+          </ul>
+        </article>
+
+        <article>
+          <h2 class="accent-label mb-4">{a.competenciesTitle}</h2>
+          <ul class="detail-list" role="list">
+            {a.focus.map((item) => (
+              <li>{item}</li>
+            ))}
+          </ul>
+        </article>
+
+        <article>
+          <h2 class="accent-label mb-4">{a.servicesTitle}</h2>
+          <ul class="space-y-4" role="list">
+            {
+              t.services.map((service) => (
+                <li class="bento-cell !p-5 sm:!p-6">
+                  <h3 class="text-sm font-extrabold text-neutral-100">{service.title}</h3>
+                  <p class="mt-2 text-sm font-light leading-relaxed text-neutral-500">
+                    {service.description}
+                  </p>
+                </li>
+              ))
+            }
+          </ul>
+        </article>
+
+        <article class="bento-cell">
+          <h2 class="accent-label mb-4">{a.workflowTitle}</h2>
+          <p class="text-sm font-light leading-relaxed text-neutral-500">{a.workflow}</p>
+        </article>
+      </div>
+
+      <div class="mt-16 flex flex-wrap gap-4">
+        <a href={githubUrl} class="btn-ghost" target="_blank" rel="noopener noreferrer">GitHub</a>
+        <a href={withBase(contactPath)} class="btn-ghost">{t.contactPage.heading}</a>
+      </div>
+    </div>
+  </section>
+</BaseLayout>

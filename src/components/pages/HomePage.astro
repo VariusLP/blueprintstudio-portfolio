@@ -1,0 +1,53 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import HeroCodePanel from '../HeroCodePanel.astro';
+import { getTranslations, type Lang } from '../../i18n';
+import { withBase } from '../../utils/url';
+
+interface Props {
+  lang: Lang;
+}
+
+const { lang } = Astro.props;
+const t = getTranslations(lang);
+const contactPath = lang === 'de' ? '/kontakt' : '/en/contact';
+const assetsPath = lang === 'de' ? '/assets' : '/en/assets';
+---
+
+<BaseLayout title={t.meta.siteTitle} lang={lang}>
+  <section
+    class="flex min-h-[100dvh] min-h-screen items-center px-4 pb-24 pt-28 sm:px-8 sm:pb-28 sm:pt-32"
+    aria-labelledby="hero-title"
+  >
+    <div class="mx-auto grid w-full max-w-7xl grid-cols-1 items-center gap-10 lg:grid-cols-2 lg:gap-14">
+      <div>
+        <img
+          src={withBase('banner.png')}
+          alt="BlueprintStudio"
+          class="brand-asset w-full max-w-xs sm:max-w-sm"
+          width="640"
+          height="160"
+          loading="eager"
+          fetchpriority="high"
+        />
+        <h1
+          id="hero-title"
+          class="mt-8 text-left text-[clamp(1.5rem,4.5vw,2.25rem)] font-extrabold leading-tight tracking-tight text-white"
+        >
+          {t.studio.role}
+        </h1>
+        <p class="mt-6 max-w-lg text-base font-light leading-relaxed text-neutral-400">
+          {t.studio.tagline}. {t.studio.intro}
+        </p>
+        <p class="mt-6 max-w-lg text-sm font-light leading-relaxed text-neutral-500">
+          {t.studio.why}
+        </p>
+        <div class="mt-12 flex flex-wrap gap-4">
+          <a href={withBase(assetsPath)} class="btn-ghost">{t.home.ctaAssets}</a>
+          <a href={withBase(contactPath)} class="btn-ghost">{t.home.ctaContact}</a>
+        </div>
+      </div>
+      <HeroCodePanel />
+    </div>
+  </section>
+</BaseLayout>

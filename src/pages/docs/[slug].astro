@@ -1,59 +1,12 @@
 ---
-import BaseLayout from '../../layouts/BaseLayout.astro';
-import { docs } from '../../data/site';
-import { withBase } from '../../utils/url';
+import DocDetailPage from '../../components/pages/DocDetailPage.astro';
+import { de } from '../../i18n';
 
 export function getStaticPaths() {
-  return docs.map((doc) => ({ params: { slug: doc.slug }, props: { doc } }));
+  return de.assets.map((doc) => ({ params: { slug: doc.slug }, props: { doc } }));
 }
 
 const { doc } = Astro.props;
-const otherDocs = docs.filter((d) => d.slug !== doc.slug);
 ---
 
-<BaseLayout title={doc.title} description={doc.intro}>
-  <section class="px-4 pb-24 pt-28 sm:px-8 sm:pb-28 sm:pt-32" aria-labelledby="doc-title">
-    <div class="mx-auto max-w-3xl">
-      <p class="accent-label mb-4">
-        <a href={withBase('/docs')} class="hover:text-cyan-300/90">Dokumentation</a>
-        {' / '}
-        {doc.title}
-      </p>
-      <h1 id="doc-title" class="section-title">{doc.title}</h1>
-      <p class="mt-6 text-sm font-light leading-relaxed text-neutral-400">{doc.intro}</p>
-
-      <div class="mt-16 space-y-6">
-        {
-          doc.sections.map((section) => (
-            <article class="bento-cell">
-              <h2 class="text-base font-extrabold text-neutral-100">{section.title}</h2>
-              <p class="mt-4 text-sm font-light leading-relaxed text-neutral-500">
-                {section.content}
-              </p>
-            </article>
-          ))
-        }
-      </div>
-
-      {
-        otherDocs.length > 0 && (
-          <div class="mt-16">
-            <p class="accent-label mb-4">Weitere Anleitungen</p>
-            <ul class="space-y-2 text-sm font-light" role="list">
-              {otherDocs.map((other) => (
-                <li>
-                  <a
-                    href={withBase(`/docs/${other.slug}`)}
-                    class="text-neutral-400 hover:text-cyan-300/90"
-                  >
-                    {other.title}
-                  </a>
-                </li>
-              ))}
-            </ul>
-          </div>
-        )
-      }
-    </div>
-  </section>
-</BaseLayout>
+<DocDetailPage lang="de" doc={doc} />

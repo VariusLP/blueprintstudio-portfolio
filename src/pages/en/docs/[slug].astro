@@ -1,0 +1,12 @@
+---
+import DocDetailPage from '../../../components/pages/DocDetailPage.astro';
+import { en } from '../../../i18n';
+
+export function getStaticPaths() {
+  return en.assets.map((doc) => ({ params: { slug: doc.slug }, props: { doc } }));
+}
+
+const { doc } = Astro.props;
+---
+
+<DocDetailPage lang="en" doc={doc} />
