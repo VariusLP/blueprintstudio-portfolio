@@ -25,8 +25,9 @@ export const contactEmail = 'saschaleitner1@gmx.at';
 export const web3formsAccessKey =
   import.meta.env.PUBLIC_WEB3FORMS_ACCESS_KEY ?? 'c2917d1f-e707-466a-8f8b-0e210b09be2b';
 
-/** Website-ID von https://cloud.umami.is — nach Anmeldung eintragen */
-export const umamiWebsiteId = import.meta.env.PUBLIC_UMAMI_WEBSITE_ID ?? '';
+/** Website-ID von https://cloud.umami.is */
+export const umamiWebsiteId =
+  import.meta.env.PUBLIC_UMAMI_WEBSITE_ID ?? 'b39a857d-737c-4133-be1c-cebc8c2cf0d0';
 
 /** Standard-CDN von Umami Cloud; bei Self-Hosting anpassen */
 export const umamiScriptUrl =
