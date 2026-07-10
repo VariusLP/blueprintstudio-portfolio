@@ -1,24 +1,8 @@
 ---
 import { contactEmail } from '../data/site';
-
-const successUrl = new URL('kontakt?gesendet=1', Astro.site + import.meta.env.BASE_URL).href;
 ---
 
-<form
-  action={`https://formsubmit.co/${contactEmail}`}
-  method="POST"
-  class="space-y-5"
->
-  <input type="hidden" name="_subject" value="Neue Anfrage — BlueprintStudio" />
-  <input type="hidden" name="_captcha" value="false" />
-  <input type="hidden" name="_template" value="table" />
-  <input type="text" name="_honey" class="hidden" tabindex="-1" autocomplete="off" />
-  <input
-    type="hidden"
-    name="_next"
-    value={successUrl}
-  />
-
+<form id="contact-form" class="space-y-5">
   <div>
     <label for="name" class="accent-label">Name</label>
     <input id="name" name="name" type="text" required class="form-input mt-2" />
@@ -36,7 +20,27 @@ const successUrl = new URL('kontakt?gesendet=1', Astro.site + import.meta.env.BA
 
   <button type="submit" class="btn-ghost">Nachricht senden</button>
   <p class="text-xs font-light text-neutral-600">
-    Nachricht wird per E-Mail an {contactEmail} gesendet. Beim ersten Mal muss FormSubmit die
-    Adresse einmalig bestätigen.
+    Öffnet dein E-Mail-Programm (z.&nbsp;B. Outlook) mit ausgefüllter Nachricht an {contactEmail}.
+    Dort auf „Senden“ klicken, um die Anfrage abzuschicken.
   </p>
 </form>
+
+<script define:vars={{ contactEmail }}>
+  const form = document.getElementById('contact-form');
+
+  form?.addEventListener('submit', (event) => {
+    event.preventDefault();
+
+    const data = new FormData(form);
+    const name = String(data.get('name') ?? '').trim();
+    const email = String(data.get('email') ?? '').trim();
+    const message = String(data.get('message') ?? '').trim();
+
+    const subject = encodeURIComponent('Anfrage BlueprintStudio');
+    const body = encodeURIComponent(
+      `Name: ${name}\nAntwort an: ${email}\n\n${message}`,
+    );
+
+    window.location.href = `mailto:${contactEmail}?subject=${subject}&body=${body}`;
+  });
+</script>
