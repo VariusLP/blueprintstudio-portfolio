@@ -1,0 +1,22 @@
+---
+/**
+ * Cookie-freie Webanalyse über Umami (https://umami.is).
+ * Aktiv, sobald `umamiWebsiteId` in site.ts gesetzt ist.
+ * Dashboard nur mit deinem Umami-Login sichtbar — Besucher sehen nichts davon.
+ */
+import { umamiWebsiteId, umamiScriptUrl } from '../data/site';
+
+const enabled = umamiWebsiteId.length > 0;
+---
+
+{
+  enabled && (
+    <script
+      is:inline
+      defer
+      src={umamiScriptUrl}
+      data-website-id={umamiWebsiteId}
+      data-domains="blueprintstudio.at,www.blueprintstudio.at,variuslp.github.io"
+    />
+  )
+}

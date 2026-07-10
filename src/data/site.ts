@@ -24,6 +24,14 @@ export const contactEmail = 'saschaleitner1@gmx.at';
 /** Öffentlicher Zugangsschlüssel von https://web3forms.com */
 export const web3formsAccessKey =
   import.meta.env.PUBLIC_WEB3FORMS_ACCESS_KEY ?? 'c2917d1f-e707-466a-8f8b-0e210b09be2b';
+
+/** Website-ID von https://cloud.umami.is — nach Anmeldung eintragen */
+export const umamiWebsiteId = import.meta.env.PUBLIC_UMAMI_WEBSITE_ID ?? '';
+
+/** Standard-CDN von Umami Cloud; bei Self-Hosting anpassen */
+export const umamiScriptUrl =
+  import.meta.env.PUBLIC_UMAMI_SCRIPT_URL ?? 'https://cloud.umami.is/script.js';
+
 export const githubUrl = 'https://github.com/VariusLP';
 export const githubHandle = 'VariusLP';
 
