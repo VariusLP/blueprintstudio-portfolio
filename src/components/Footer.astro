@@ -37,7 +37,17 @@ const year = new Date().getFullYear();
       </address>
     </div>
     <div>
-      <p class="accent-label">BlueprintStudio</p>
+      <a href={withBase('/')} class="inline-flex items-center gap-3">
+        <img
+          src={withBase('logo.png')}
+          alt=""
+          class="h-9 w-9"
+          width="36"
+          height="36"
+          aria-hidden="true"
+        />
+        <span class="text-sm font-extrabold text-white">BlueprintStudio</span>
+      </a>
       <p class="mt-3 text-sm font-light leading-relaxed text-neutral-500">
         Full-Cycle Software &amp; Solutions.
       </p>

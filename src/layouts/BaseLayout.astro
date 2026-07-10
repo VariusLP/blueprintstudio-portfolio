@@ -32,8 +32,13 @@ const pageTitle = title === 'BlueprintStudio' ? title : `${title} – BlueprintS
     <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
     <meta name="description" content={description} />
     <meta name="color-scheme" content="dark" />
+    <meta property="og:type" content="website" />
+    <meta property="og:image" content={new URL(withBase('banner.png'), Astro.site).href} />
+    <meta property="og:title" content={pageTitle} />
+    <meta property="og:description" content={description} />
     <title>{pageTitle}</title>
-    <link rel="icon" href={withBase('favicon.svg')} type="image/svg+xml" />
+    <link rel="icon" href={withBase('logo.png')} type="image/png" />
+    <link rel="apple-touch-icon" href={withBase('logo.png')} />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   </head>

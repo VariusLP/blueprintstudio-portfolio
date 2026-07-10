@@ -146,6 +146,14 @@
   .mobile-nav-chevron {
     transition: transform 0.15s ease;
   }
+
+  .brand-link {
+    @apply rounded-lg transition-opacity duration-200 hover:opacity-90;
+  }
+
+  .brand-link[aria-current='page'] .brand-banner {
+    @apply opacity-100 drop-shadow-[0_0_12px_rgba(34,211,238,0.25)];
+  }
 }
 
 @layer utilities {
