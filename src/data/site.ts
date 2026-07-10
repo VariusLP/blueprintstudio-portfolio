@@ -49,31 +49,61 @@ export const studio = {
   owner: 'Sascha Leitner',
   tradeName: 'BlueprintStudio',
   location: 'Münzbach, Österreich',
-  tagline: 'Unity, Algorithmen & Performance',
+  role: 'Full-Cycle Software & Solutions Developer',
+  tagline: 'Vom Prototyp bis zur fertigen Applikation',
   intro:
-    'Ich bin Softwareentwickler mit Fokus auf Unity, algorithmische Problemlösung und messbare Laufzeit-Performance. BlueprintStudio ist mein technisches Studio für Editor-Tools, Optimierung und produktive Asset-Store-Lösungen.',
+    'Unter der Marke BlueprintStudio entwickle ich maßgeschneiderte Softwarelösungen — von Unity-Tools und Applikationen bis hin zu feature-reichen Produkten. Der Fokus liegt auf strukturierter Umsetzung, klarer Kommunikation und effizienten, KI-gestützten Entwicklungs-Workflows.',
   why:
-    'Statt oberflächlicher Features liefere ich Profiler-gestützte Analysen, automatisierte Workflows und wartbaren C#-Code — mit klarem Fokus auf Frame Times, Speicher und Build-Effizienz.',
+    'Jedes Projekt beginnt mit Feature-Analyse und Meilenstein-Planung. So entstehen wartbare Systeme mit messbarem Fortschritt — ob Editor-Extension, Simulation oder Asset-Store-Tool.',
 };
 
 export const about = {
-  headline: 'Technischer Background',
+  headline: 'Profil',
   summary:
-    'Softwareentwickler mit Ausbildung am SAE Institute. Schwerpunkt: Unity-Entwicklung, Performance-Engineering und Automatisierung von Entwicklungsprozessen.',
-  education: 'SAE Institute — Software Engineering / Game Development',
-  focus: [
-    'Unity Editor Tools & UI Toolkit',
-    'Performance-Profiling und Frame-Time-Optimierung',
-    'Algorithmen und System-Design',
-    'Workflow-Automatisierung und Build-Pipelines',
+    'Als Full-Cycle Software & Solutions Developer realisiere ich Kundenanforderungen end-to-end: Anforderungsanalyse, Rapid Prototyping, iterative Umsetzung und dokumentierte Übergabe. Schwerpunkte sind Unity-Entwicklung, Editor-Tools und produktive Workflow-Automatisierung.',
+  education: [
+    'Unternehmensgründungsprogramm (UGP) — laufend seit 07/2026, Fokus Markteintritt',
+    'Diplom Games Programming, SAE Wien — 2023 bis 2024',
+    'Lehre Elektrotechnik — 2016 bis 2020',
   ],
+  focus: [
+    'Unity & Unreal Engine — Applikationen, Tools und Prototypen',
+    'C#, C++ und .NET Framework',
+    'KI-gestützte Skripterstellung und strukturierte Feature-Integration',
+    'Meilenstein-Planung, Projektdokumentation und transparente Kommunikation',
+  ],
+  workflow:
+    'BlueprintStudio Workflow: Detaillierte Feature-Analyse, Meilenstein-Planung und iterative Umsetzung. Rapid Prototyping visualisiert Ideen früh — als solide Basis für das Endprodukt.',
 };
+
+export const services = [
+  {
+    title: 'Individuelle Softwareentwicklung',
+    description: 'Umsetzung von Applikationen und Unity-Projekten nach Maß.',
+  },
+  {
+    title: 'Feature-Integration',
+    description: 'Präzise Implementierung spezifischer Kundenanforderungen.',
+  },
+  {
+    title: 'BlueprintStudio Workflow',
+    description:
+      'Strukturierte Projektabwicklung durch Feature-Analyse, Meilenstein-Planung und iterative Releases.',
+  },
+  {
+    title: 'Rapid Prototyping',
+    description: 'Schnelle Visualisierung von Ideen als Basis für das Endprodukt.',
+  },
+];
+
+export const assetsIntro =
+  'Aktuelle Unity-Tools im Asset Store — mit technischer Dokumentation und klarer Editor-Integration. Weitere Editor-Utilities und Produktivitäts-Tools sind in Planung und werden schrittweise veröffentlicht.';
 
 export const openSource = {
   workflow:
-    'Repositories werden mit klaren READMEs, nachvollziehbaren Commits und semantischer Versionierung gepflegt. Editor-Utilities und Performance-Tools entstehen zuerst in produktiven Projekten und werden bei Reife schrittweise als Open Source veröffentlicht.',
+    'Neben den Asset-Store-Produkten dokumentiere ich ausgewählte Projekte und Code-Beispiele transparent — mit klaren READMEs, nachvollziehbaren Commits und strukturierter Architektur.',
   approach:
-    'Der Fokus liegt auf wiederverwendbarem, dokumentiertem Code — keine Demo-Repos, sondern Tools mit definiertem Setup, minimalem Overhead und nachvollziehbarer Architektur.',
+    'Der Fokus liegt auf wiederverwendbarem, produktionsnahem Code — Tools und Prototypen mit definiertem Setup, minimalem Overhead und nachvollziehbarer Umsetzung.',
 };
 
 export const assets = [
@@ -153,29 +183,61 @@ export const docs = assets.map((asset) => ({
   sections: asset.sections,
 }));
 
-export const portfolioProjects = [
+export type PortfolioProject = {
+  name: string;
+  type: string;
+  description: string;
+  tags: string[];
+  url?: string;
+  internalUrl?: string;
+};
+
+export const portfolioProjects: PortfolioProject[] = [
+  {
+    name: 'SaveSystemPro',
+    type: 'Asset Store',
+    description: 'Modulares Save/Load-System für Unity — flexible API und Editor-Integration.',
+    internalUrl: '/assets',
+    tags: ['Unity', 'C#', 'Save System'],
+  },
+  {
+    name: 'Project Slimmer',
+    type: 'Asset Store',
+    description: 'Editor Extension zur Projekt-Optimierung und Build-Size-Reduktion.',
+    internalUrl: '/assets',
+    tags: ['Unity', 'Editor Tool', 'Optimization'],
+  },
+  {
+    name: 'OreExtraction',
+    type: 'Unity',
+    description: 'Mining-Simulation mit Fokus auf System-Design und spielbare Mechaniken.',
+    tags: ['Unity', 'Simulation', 'Gameplay'],
+  },
+  {
+    name: 'Escape Strategist',
+    type: 'Unreal Engine',
+    description: 'Visuelle Unreal-Umsetzung — Konzeptentwicklung und technische Realisierung.',
+    tags: ['Unreal', 'Visualization', 'C++'],
+  },
+  {
+    name: 'Necrosia',
+    type: 'Prototype',
+    description: 'RPG-Konzept-Prototyp — frühe Spielmechaniken und System-Validierung.',
+    tags: ['RPG', 'Prototype', 'Game Design'],
+  },
   {
     name: 'VariusLP — GitHub',
     type: 'Open Source',
-    description:
-      'Unity Editor-Skripte, Performance-Utilities und Tool-Experimente außerhalb des Asset Stores.',
+    description: 'Unity-Skripte, Tool-Experimente und Referenzimplementierungen.',
     url: githubUrl,
-    tags: ['C#', 'Unity', 'Editor Tools'],
-  },
-  {
-    name: 'FrameBudgetProfiler',
-    type: 'Code Example',
-    description:
-      'Editor-Utility zur Frame-Time-Analyse mit Profiler-Marker-Integration — Referenzimplementierung für Performance-Workflows.',
-    url: githubUrl,
-    tags: ['Profiler', 'C#', 'Performance'],
+    tags: ['C#', 'Unity', 'GitHub'],
   },
 ];
 
 export const impressum = {
   owner: 'Sascha Leitner',
   tradeName: 'BlueprintStudio',
-  profession: 'Software-Entwicklung (Freelancer)',
+  profession: 'Full-Cycle Software & Solutions Developer (Freelancer)',
   street: 'Arbingerstraße 2/5',
   zip: '4323',
   city: 'Münzbach',

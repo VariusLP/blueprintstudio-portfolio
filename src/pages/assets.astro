@@ -1,6 +1,6 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
-import { assets } from '../data/site';
+import { assets, assetsIntro } from '../data/site';
 import { withBase } from '../utils/url';
 ---
 
@@ -13,8 +13,7 @@ import { withBase } from '../utils/url';
       <p class="accent-label mb-4">Unity Asset Store</p>
       <h1 id="assets-title" class="section-title">Assets / Shop</h1>
       <p class="mt-8 max-w-2xl text-sm font-light leading-relaxed text-neutral-400">
-        Direktlinks zu den Unity Asset Store Produkten. Technische Anleitungen findest du
-        unter Dokumentation.
+        {assetsIntro}
       </p>
 
       <ul class="mt-12 grid grid-cols-1 gap-4 md:grid-cols-2 sm:mt-16" role="list">

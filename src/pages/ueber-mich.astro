@@ -1,24 +1,32 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
-import { about, studio, githubUrl } from '../data/site';
+import { about, studio, services, githubUrl } from '../data/site';
 import { withBase } from '../utils/url';
 ---
 
-<BaseLayout title="Über mich" description="Sascha Leitner — Softwareentwickler, SAE-Absolvent, Fokus auf Unity, Performance und Automatisierung.">
+<BaseLayout
+  title="Über mich"
+  description="Sascha Leitner — Full-Cycle Software & Solutions Developer, SAE-Absolvent, BlueprintStudio."
+>
   <section class="px-4 pb-24 pt-28 sm:px-8 sm:pb-28 sm:pt-32" aria-labelledby="about-title">
     <div class="mx-auto max-w-3xl">
       <p class="accent-label mb-4">BlueprintStudio</p>
       <h1 id="about-title" class="section-title">{studio.owner}</h1>
+      <p class="mt-4 text-sm font-light text-cyan-300/80">{studio.role}</p>
       <p class="mt-8 text-base font-light leading-relaxed text-neutral-400">{about.summary}</p>
 
       <div class="mt-16 space-y-12">
         <article>
-          <h2 class="accent-label mb-4">Ausbildung</h2>
-          <p class="text-sm font-light text-neutral-300">{about.education}</p>
+          <h2 class="accent-label mb-4">Ausbildung &amp; Qualifikationen</h2>
+          <ul class="detail-list" role="list">
+            {about.education.map((item) => (
+              <li>{item}</li>
+            ))}
+          </ul>
         </article>
 
         <article>
-          <h2 class="accent-label mb-4">Technischer Fokus</h2>
+          <h2 class="accent-label mb-4">Kompetenzen</h2>
           <ul class="detail-list" role="list">
             {about.focus.map((item) => (
               <li>{item}</li>
@@ -26,13 +34,25 @@ import { withBase } from '../utils/url';
           </ul>
         </article>
 
+        <article>
+          <h2 class="accent-label mb-4">Dienstleistungen</h2>
+          <ul class="space-y-4" role="list">
+            {
+              services.map((service) => (
+                <li class="bento-cell !p-5 sm:!p-6">
+                  <h3 class="text-sm font-extrabold text-neutral-100">{service.title}</h3>
+                  <p class="mt-2 text-sm font-light leading-relaxed text-neutral-500">
+                    {service.description}
+                  </p>
+                </li>
+              ))
+            }
+          </ul>
+        </article>
+
         <article class="bento-cell">
           <h2 class="accent-label mb-4">Arbeitsweise</h2>
-          <p class="text-sm font-light leading-relaxed text-neutral-500">
-            Performance-Messung vor Optimierung. Automatisierung dort, wo manuelle Schritte
-            Fehler provozieren. Klare Modulgrenzen und dokumentierter Code — besonders bei
-            wachsenden Unity-Codebases und paralleler Team-Entwicklung.
-          </p>
+          <p class="text-sm font-light leading-relaxed text-neutral-500">{about.workflow}</p>
         </article>
       </div>
 
