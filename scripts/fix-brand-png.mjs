@@ -31,6 +31,7 @@ for (const file of files) {
 
   await sharp(data, { raw: { width: info.width, height: info.height, channels: 4 } })
     .png()
+    .trim({ threshold: 1 })
     .toFile(temp);
 
   const { renameSync, unlinkSync } = await import('node:fs');
