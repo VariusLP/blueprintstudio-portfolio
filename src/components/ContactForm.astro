@@ -3,7 +3,7 @@ import { contactEmail, web3formsAccessKey } from '../data/site';
 import { withBase } from '../utils/url';
 
 const formConfigured = web3formsAccessKey.length > 0;
-const redirectUrl = new URL(withBase('/kontakt?sent=1'), Astro.url.origin).href;
+const redirectUrl = new URL(withBase('/kontakt?sent=1'), import.meta.env.SITE).href;
 ---
 
 <form
