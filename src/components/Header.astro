@@ -1,0 +1,52 @@
+---
+import { nav } from '../data/site';
+import { withBase } from '../utils/url';
+
+interface Props {
+  currentPath: string;
+}
+
+const { currentPath } = Astro.props;
+
+function isActive(href: string) {
+  const normalized = href === '/' ? '/' : href.replace(/\/$/, '');
+  if (normalized === '/') return currentPath === '/' || currentPath === '';
+  return currentPath === normalized || currentPath.startsWith(`${normalized}/`);
+}
+---
+
+<header class="fixed inset-x-0 top-0 z-50 border-b border-white/[0.06] bg-[#030308]/70 backdrop-blur-xl">
+  <div class="mx-auto flex max-w-7xl items-center justify-between px-6 py-5 sm:px-8">
+    <a
+      href={withBase('/')}
+      class:list={[
+        'text-sm font-extrabold tracking-tight',
+        isActive('/') ? 'text-cyan-300/90' : 'text-white',
+      ]}
+    >
+      BlueprintStudio
+    </a>
+    <nav aria-label="Hauptnavigation">
+      <ul class="flex flex-wrap justify-end gap-x-6 gap-y-2 sm:gap-x-8">
+        {
+          nav.map((item) => (
+            <li>
+              <a
+                href={withBase(item.href)}
+                class:list={[
+                  'text-sm font-light transition-colors',
+                  isActive(item.href)
+                    ? 'text-cyan-300/90'
+                    : 'text-neutral-500 hover:text-cyan-300/90',
+                ]}
+                aria-current={isActive(item.href) ? 'page' : undefined}
+              >
+                {item.label}
+              </a>
+            </li>
+          ))
+        }
+      </ul>
+    </nav>
+  </div>
+</header>

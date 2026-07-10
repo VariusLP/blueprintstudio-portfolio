@@ -1,0 +1,57 @@
+---
+import '../styles/global.css';
+import AmbientBackground from '../components/AmbientBackground.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+
+interface Props {
+  title: string;
+  description?: string;
+}
+
+const {
+  title,
+  description = 'BlueprintStudio – High-Performance Software & Unity Development. Unity Editor Tools, Performance-Optimierung und maßgeschneiderte Software-Lösungen.',
+} = Astro.props;
+
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+let currentPath = Astro.url.pathname;
+if (base && currentPath.startsWith(base)) {
+  currentPath = currentPath.slice(base.length) || '/';
+}
+if (!currentPath.startsWith('/')) currentPath = `/${currentPath}`;
+const pageTitle = title === 'BlueprintStudio' ? title : `${title} – BlueprintStudio`;
+---
+
+<!doctype html>
+<html lang="de">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content={description} />
+    <meta name="color-scheme" content="dark" />
+    <title>{pageTitle}</title>
+    <link rel="icon" href={`${import.meta.env.BASE_URL}favicon.svg`} type="image/svg+xml" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  </head>
+
+  <body>
+    <AmbientBackground />
+
+    <a
+      href="#main"
+      class="sr-only focus:not-sr-only focus:fixed focus:left-8 focus:top-8 focus:z-50 focus:rounded-full focus:border focus:border-white/20 focus:px-4 focus:py-2 focus:text-sm focus:text-white"
+    >
+      Zum Inhalt springen
+    </a>
+
+    <Header currentPath={currentPath} />
+
+    <main id="main" class="relative">
+      <slot />
+    </main>
+
+    <Footer />
+  </body>
+</html>
