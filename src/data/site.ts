@@ -61,6 +61,8 @@ export const about = {
   headline: 'Profil',
   summary:
     'Als Full-Cycle Software & Solutions Developer realisiere ich Kundenanforderungen end-to-end: Anforderungsanalyse, Rapid Prototyping, iterative Umsetzung und dokumentierte Übergabe. Schwerpunkte sind Unity-Entwicklung, Editor-Tools und produktive Workflow-Automatisierung.',
+  scope:
+    'Ich konzentriere mich als Full-Cycle Developer auf die technische Realisierung und Systemarchitektur. Ich biete keine Grafik- oder UI-Design-Leistungen an, arbeite aber bei Bedarf nahtlos mit Grafikern oder Designern zusammen.',
   education: [
     'Unternehmensgründungsprogramm (UGP) — laufend seit 07/2026, Fokus Markteintritt',
     'Diplom Games Programming, SAE Wien — 2023 bis 2024',
