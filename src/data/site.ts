@@ -26,7 +26,8 @@ export const openSource = {
 
 export const studio = {
   name: 'BlueprintStudio',
-  legalName: 'BlueprintStudio e.U.',
+  legalName: 'Sascha Leitner',
+  tradeName: 'BlueprintStudio',
   owner: 'Sascha Leitner',
   location: 'Münzbach, Österreich',
   tagline: 'High-Performance Software & Unity Development',
@@ -207,20 +208,6 @@ export const projects = [
     url: '#',
     tags: ['C#', 'Unity Editor', 'Optimization'],
   },
-  {
-    name: 'FrameBudgetProfiler',
-    type: 'Open Source',
-    description: 'Editor-Utility zur Frame-Time-Analyse und Profiler-Marker-Integration.',
-    url: githubUrl,
-    tags: ['C#', 'Profiler', 'Editor Tool'],
-  },
-  {
-    name: 'BlueprintStudio Tools',
-    type: 'Internal Toolchain',
-    description: 'Sammlung wiederverwendbarer Editor-Erweiterungen und Build-Skripte.',
-    url: githubUrl,
-    tags: ['UI Toolkit', 'Automation', 'Pipeline'],
-  },
 ];
 
 export const skills = [
@@ -231,12 +218,15 @@ export const skills = [
 ];
 
 export const impressum = {
-  status: 'In Vorbereitung',
-  company: 'BlueprintStudio e.U.',
   owner: 'Sascha Leitner',
+  tradeName: 'BlueprintStudio',
+  profession: 'Software-Entwicklung (Freelancer)',
   street: 'Arbingerstraße 2/5',
-  city: '4323 Münzbach',
+  zip: '4323',
+  city: 'Münzbach',
   country: 'Österreich',
+  firmenbuch: 'Kein Eintrag im österreichischen Firmenbuch.',
+  uid: 'Keine UID-Nummer.',
 };
 
 export const heroCodeSnippet = `

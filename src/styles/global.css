@@ -80,7 +80,7 @@
   }
 
   .tag {
-    @apply inline-block rounded-full border border-white/10 bg-white/[0.03] px-3 py-1 text-xs font-light text-neutral-400;
+    @apply flex items-center rounded-lg border border-white/10 bg-white/[0.04] px-4 py-3 text-xs font-light leading-snug text-neutral-400;
   }
 
   .detail-list {

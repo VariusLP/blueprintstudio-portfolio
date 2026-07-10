@@ -31,7 +31,7 @@ import { githubUrl, githubHandle, projects, skills, studio, openSource } from '.
           <div>
             <p class="accent-label mb-4">Entwickler</p>
             <h2 id="profile-title" class="section-title">{studio.owner}</h2>
-            <p class="mt-2 text-sm font-light text-neutral-500">{studio.legalName}</p>
+            <p class="mt-2 text-sm font-light text-neutral-500">{studio.tradeName}</p>
           </div>
           <div>
             <p class="text-sm font-light leading-relaxed text-neutral-400">
@@ -55,8 +55,8 @@ import { githubUrl, githubHandle, projects, skills, studio, openSource } from '.
       <h2 id="projects-title" class="section-title mb-12">Projekte</h2>
       <ul class="grid grid-cols-1 gap-3 sm:grid-cols-2 lg:gap-4" role="list">
         {
-          projects.map((project, index) => (
-            <li class={index === 0 ? 'bento-cell-featured sm:col-span-2' : 'bento-cell'}>
+          projects.map((project) => (
+            <li class="bento-cell">
               <p class="accent-label">{project.type}</p>
               <h3 class="mt-2 text-base font-extrabold text-neutral-100">
                 <a
