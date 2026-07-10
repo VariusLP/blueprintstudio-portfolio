@@ -1,5 +1,5 @@
 ---
-import { getAlternatePath, type Lang } from '../i18n';
+import { getAlternatePath, getTranslations, type Lang } from '../i18n';
 import { withBase } from '../utils/url';
 
 interface Props {
@@ -8,11 +8,15 @@ interface Props {
 }
 
 const { currentPath, lang } = Astro.props;
+const t = getTranslations(lang);
 const alternatePath = getAlternatePath(currentPath);
-const alternateLang = lang === 'de' ? 'en' : 'de';
 ---
 
-<div class="flex items-center gap-1 rounded-lg border border-white/10 bg-white/[0.03] p-0.5 text-xs font-light">
+<div
+  class="flex items-center gap-1 rounded-lg border border-white/10 bg-white/[0.03] p-0.5 text-xs font-light"
+  role="group"
+  aria-label={t.ui.languageSelection}
+>
   <a
     href={withBase(lang === 'de' ? currentPath : alternatePath)}
     class:list={[

@@ -20,7 +20,7 @@ export const en: Translations = {
       ],
     },
     { label: 'Contact', href: '/en/contact' },
-    { label: 'About', href: '/en/about' },
+    { label: 'About me', href: '/en/about' },
   ],
   footer: {
     navigation: 'Navigation',
@@ -30,7 +30,7 @@ export const en: Translations = {
   },
   ui: {
     docsOverview: 'Overview',
-    otherDocs: 'More guides',
+    otherDocs: 'Other guides',
     openGuide: 'Open guide',
     unityAssetStore: 'Unity Asset Store',
     documentation: 'Documentation',
@@ -40,6 +40,7 @@ export const en: Translations = {
     menuClose: 'Close menu',
     navMain: 'Main navigation',
     navMobile: 'Mobile navigation',
+    languageSelection: 'Language',
   },
   studio: {
     name: 'BlueprintStudio',
@@ -47,55 +48,55 @@ export const en: Translations = {
     role: 'Full-Cycle Software & Solutions Developer',
     tagline: 'From prototype to production-ready application',
     intro:
-      'Under the BlueprintStudio brand, I build tailored software solutions — from Unity tools and applications to feature-rich products. The focus is on structured delivery, clear communication, and efficient AI-assisted development workflows.',
+      'Under the BlueprintStudio brand, I build tailored software solutions — from Unity tools and applications to feature-rich products. I focus on structured delivery, clear communication, and efficient AI-assisted development workflows.',
     why:
-      'Every project starts with feature analysis and milestone planning. This produces maintainable systems with measurable progress — whether editor extensions, simulations, or Asset Store tools.',
+      'Every project starts with feature analysis and milestone planning. That way you get maintainable systems with measurable progress — whether it is an editor extension, a simulation, or an Asset Store tool.',
     location: 'Münzbach, Austria',
   },
   about: {
-    pageTitle: 'About',
+    pageTitle: 'About me',
     pageDescription:
-      'Sascha Leitner — Full-Cycle Software & Solutions Developer, SAE graduate, BlueprintStudio.',
+      'Sascha Leitner — Full-Cycle Software & Solutions Developer, SAE Vienna graduate, BlueprintStudio.',
     label: 'BlueprintStudio',
-    educationTitle: 'Education & Qualifications',
-    competenciesTitle: 'Competencies',
+    educationTitle: 'Education & qualifications',
+    competenciesTitle: 'Skills & expertise',
     servicesTitle: 'Services',
-    workflowTitle: 'Working Method',
+    workflowTitle: 'How I work',
     summary:
-      'As a Full-Cycle Software & Solutions Developer, I deliver customer requirements end-to-end: requirements analysis, rapid prototyping, iterative implementation, and documented handover. Focus areas include Unity development, editor tools, and productive workflow automation.',
+      'As a Full-Cycle Software & Solutions Developer, I take client requirements from start to finish: requirements analysis, rapid prototyping, iterative implementation, and documented handover. My focus is Unity development, editor tools, and workflow automation that improves day-to-day productivity.',
     scope:
-      'As a Full-Cycle Developer, I focus on technical implementation and system architecture. I do not offer graphic or UI design services, but collaborate seamlessly with artists or designers when needed.',
+      'I focus on technical implementation and system architecture. I do not offer graphic or UI design services, but I work closely with artists and designers whenever a project needs it.',
     education: [
-      'Business Start-up Programme (UGP) — ongoing since 07/2026, market entry focus',
-      'Diploma Games Programming, SAE Vienna — 2023 to 2024',
-      'Electrical Engineering Apprenticeship — 2016 to 2020',
+      'Business Start-up Programme (UGP) — ongoing since 07/2026, focused on market entry',
+      'Diploma in Games Programming, SAE Vienna — 2023 to 2024',
+      'Electrical engineering apprenticeship — 2016 to 2020',
     ],
     focus: [
       'Unity & Unreal Engine — applications, tools, and prototypes',
-      'C#, C++, Python, JavaScript & more — AI-assisted adaptation of additional languages',
+      'C#, C++, Python, JavaScript & more — quick ramp-up on additional languages with AI support',
       'AI-assisted scripting and structured feature integration',
-      'Milestone planning, project documentation, and transparent communication',
+      'Milestone planning, project documentation, and clear, transparent communication',
     ],
     workflow:
-      'BlueprintStudio workflow: detailed feature analysis, milestone planning, and iterative delivery. Rapid prototyping visualises ideas early — as a solid foundation for the final product.',
+      'BlueprintStudio workflow: detailed feature analysis, milestone planning, and iterative delivery. Rapid prototyping helps validate ideas early and gives the final product a solid foundation.',
   },
   services: [
     {
-      title: 'Custom Software Development',
-      description: 'Tailored applications and Unity projects built to specification.',
+      title: 'Custom software development',
+      description: 'Applications and Unity projects built to your requirements.',
     },
     {
-      title: 'Feature Integration',
-      description: 'Precise implementation of specific customer requirements.',
+      title: 'Feature integration',
+      description: 'Targeted implementation of specific client features and requirements.',
     },
     {
-      title: 'BlueprintStudio Workflow',
+      title: 'BlueprintStudio workflow',
       description:
         'Structured project delivery through feature analysis, milestone planning, and iterative releases.',
     },
     {
-      title: 'Rapid Prototyping',
-      description: 'Fast visualisation of ideas as a foundation for the final product.',
+      title: 'Rapid prototyping',
+      description: 'Quick visual prototypes to validate ideas before building the final product.',
     },
   ],
   assetsPage: {
@@ -104,10 +105,10 @@ export const en: Translations = {
     label: 'Unity Asset Store',
     heading: 'Assets / Shop',
     intro:
-      'Current Unity tools on the Asset Store — with technical documentation and clear editor integration. Additional editor utilities and productivity tools are planned and will be released incrementally.',
+      'Unity tools currently available on the Asset Store — each with technical documentation and clear editor integration. More editor utilities and productivity tools are in development and will be released step by step.',
   },
   assetsIntro:
-    'Current Unity tools on the Asset Store — with technical documentation and clear editor integration. Additional editor utilities and productivity tools are planned and will be released incrementally.',
+    'Unity tools currently available on the Asset Store — each with technical documentation and clear editor integration. More editor utilities and productivity tools are in development and will be released step by step.',
   assets: [
     {
       name: 'SaveSystemPro',
@@ -132,7 +133,7 @@ export const en: Translations = {
         {
           title: 'Quick Start',
           content:
-            'Implement ISaveable on your data classes, register serializers via SaveSystemConfig, and call SaveManager.Save(slot) or Load(slot). Async variants avoid frame spikes with large data sets.',
+            'Implement ISaveable on your data classes, register serializers through SaveSystemConfig, and call SaveManager.Save(slot) or Load(slot). The async variants prevent frame spikes when saving or loading large data sets.',
         },
         {
           title: 'Architecture',
@@ -165,12 +166,12 @@ export const en: Translations = {
         {
           title: 'Workflow',
           content:
-            'Run a scan first — the tool lists unreferenced assets, large textures, and redundant meshes. Preview mode shows impact before deletion. Build size report recommended before every release.',
+            'Run a scan first — the tool lists unreferenced assets, large textures, and redundant meshes. Preview mode shows the impact before anything is deleted. A build size report is recommended before every release.',
         },
         {
           title: 'Safety',
           content:
-            'No automatic deletion without confirmation. Backup or version control before batch operations. Ignore lists for assets that are intentionally unreferenced.',
+            'Nothing is deleted automatically without your confirmation. Create a backup or use version control before batch operations. Ignore lists let you keep assets that are intentionally unreferenced.',
         },
       ],
     },
@@ -181,7 +182,7 @@ export const en: Translations = {
     label: 'Wiki',
     heading: 'Documentation',
     intro:
-      'Technical guides for setup, workflow, and architecture of BlueprintStudio tools. Select a product from the submenu or directly below.',
+      'Technical guides for setup, workflow, and architecture of BlueprintStudio tools. Pick a product from the menu above or choose one below.',
   },
   portfolioPage: {
     title: 'Portfolio',
@@ -190,13 +191,13 @@ export const en: Translations = {
     label: 'BlueprintStudio',
     heading: 'Portfolio / Projects',
     intro:
-      'Selected projects — from Asset Store tools to Unity simulations and Unreal and RPG prototypes. Unity tools SaveSystemPro and Project Slimmer are the first published products; more editor utilities to follow.',
+      'Selected projects — from Asset Store tools to Unity simulations and Unreal and RPG prototypes. SaveSystemPro and Project Slimmer were the first published Unity tools; more editor utilities are on the way.',
     workflow:
-      'Alongside Asset Store products, I document selected projects and code examples transparently — with clear READMEs, traceable commits, and structured architecture.',
+      'Alongside my Asset Store products, I share selected projects and code examples openly — with clear READMEs, a transparent commit history, and well-structured architecture.',
   },
   openSource: {
     workflow:
-      'Alongside Asset Store products, I document selected projects and code examples transparently — with clear READMEs, traceable commits, and structured architecture.',
+      'Alongside my Asset Store products, I share selected projects and code examples openly — with clear READMEs, a transparent commit history, and well-structured architecture.',
   },
   portfolioProjects: [
     {
@@ -222,7 +223,7 @@ export const en: Translations = {
     {
       name: 'Escape Strategist',
       type: 'Unreal Engine',
-      description: 'Visual Unreal implementation — concept development and technical delivery.',
+      description: 'Visual Unreal project — concept development and technical implementation.',
       tags: ['Unreal', 'Visualization', 'C++'],
     },
     {
@@ -242,10 +243,10 @@ export const en: Translations = {
   contactPage: {
     title: 'Contact',
     description: 'Contact BlueprintStudio — project inquiries and technical questions.',
-    label: 'Inquiry',
+    label: 'Get in touch',
     heading: 'Contact',
     intro:
-      'Technical inquiries about Unity projects, assets, or collaboration. The form sends your message directly by email.',
+      'Questions about Unity projects, assets, or working together? Use the form below — your message is sent directly by email.',
     emailLabel: 'Email',
     responseLabel: 'Response time',
     responseText: 'Usually within 48 hours',
@@ -256,15 +257,15 @@ export const en: Translations = {
     message: 'Message',
     submit: 'Send message',
     sending: 'Sending…',
-    subject: 'BlueprintStudio Inquiry',
-    fromName: 'BlueprintStudio Contact Form',
+    subject: 'BlueprintStudio inquiry',
+    fromName: 'BlueprintStudio contact form',
     hintConfigured:
-      'Your message is sent directly by email — no Outlook or other mail client required.',
-    hintNotConfigured: 'Form backend not configured yet. Email directly at',
-    success: 'Message sent! I usually respond within 48 hours.',
-    successRedirect: 'Message sent! I usually respond within 48 hours.',
-    error: 'Sending failed. Opening mail client as fallback — or email',
-    notConfigured: 'Direct sending not configured. Opening mail client — or email',
+      'Your message is delivered directly by email — no Outlook or other mail client required.',
+    hintNotConfigured: 'The form is not set up yet. Please email me at',
+    success: 'Message sent! I will usually get back to you within 48 hours.',
+    successRedirect: 'Message sent! I will usually get back to you within 48 hours.',
+    error: 'Could not send your message. Your email app will open as a fallback — or email me at',
+    notConfigured: 'Direct sending is not set up yet. Your email app will open — or email me at',
   },
   impressumPage: {
     title: 'Legal Notice',
@@ -272,30 +273,31 @@ export const en: Translations = {
       'Legal notice and publisher information for BlueprintStudio — Sascha Leitner, Münzbach, Austria.',
     label: 'Legal',
     heading: 'Legal Notice',
-    legalBasis: 'Information pursuant to § 5 ECG and § 25 MedienG (Austria)',
-    publisher: 'Media owner and publisher',
-    tradeName: 'Business name',
+    legalBasis:
+      'Legal information according to Austrian law (ECG / MedienG). Details pursuant to § 5 ECG and § 25 MedienG.',
+    publisher: 'Owner and publisher',
+    tradeName: 'Trading name',
     tradeNameNote: '(brand and project name)',
     profession: 'Profession',
     address: 'Address',
     contact: 'Contact',
     emailLabel: 'Email',
     companyRegister: 'Company register',
-    companyRegisterText: 'No entry in the Austrian company register.',
+    companyRegisterText: 'Not registered in the Austrian company register.',
     vat: 'VAT ID',
-    vatText: 'No VAT identification number.',
+    vatText: 'No VAT identification number (UID) on file.',
     privacy: 'Privacy / Web analytics',
     privacyText:
       'This website uses Umami Analytics — a cookie-free, anonymised traffic measurement. No personal profiles are created and no data is shared with advertising networks. Analytics are accessible only to the operator of this website. Legal basis: legitimate interest pursuant to Art. 6(1)(f) GDPR (technical optimisation of the website).',
     liabilityContent: 'Liability for content',
     liabilityContentText:
-      'The content of this website was created with the greatest care. However, no guarantee can be given for the accuracy, completeness, or timeliness of the content.',
+      'The content of this website was prepared with great care. However, no guarantee can be given for the accuracy, completeness, or timeliness of the information provided.',
     liabilityLinks: 'Liability for links',
     liabilityLinksText:
-      'This website contains links to external third-party websites. I have no influence on their content. The respective provider is always responsible for the content of linked pages.',
+      'This website contains links to external third-party websites. I have no control over their content. The respective provider is always responsible for the content of linked pages.',
   },
   home: {
-    ctaAssets: 'Unity Assets',
-    ctaContact: 'Request a project',
+    ctaAssets: 'Unity assets',
+    ctaContact: 'Discuss your project',
   },
 };

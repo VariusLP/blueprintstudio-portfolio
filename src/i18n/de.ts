@@ -40,6 +40,7 @@ export const de: Translations = {
     menuClose: 'Menü schließen',
     navMain: 'Hauptnavigation',
     navMobile: 'Mobile Navigation',
+    languageSelection: 'Sprache',
   },
   studio: {
     name: 'BlueprintStudio',

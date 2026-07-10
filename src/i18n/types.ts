@@ -57,6 +57,7 @@ export type Translations = {
     menuClose: string;
     navMain: string;
     navMobile: string;
+    languageSelection: string;
   };
   studio: {
     name: string;
