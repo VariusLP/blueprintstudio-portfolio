@@ -13,10 +13,17 @@
     scroll-behavior: auto;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+    -webkit-tap-highlight-color: transparent;
   }
 
   body {
     @apply bg-surface font-sans font-light text-neutral-300;
+    padding-left: env(safe-area-inset-left);
+    padding-right: env(safe-area-inset-right);
+  }
+
+  body.nav-open {
+    overflow: hidden;
   }
 
   ::selection {
@@ -52,15 +59,15 @@
   }
 
   .bento-cell {
-    @apply rounded-xl border border-white/10 bg-white/[0.03] p-7 backdrop-blur-sm transition-[border-color,box-shadow] duration-200 hover:border-cyan-400/20 hover:shadow-[0_0_32px_rgba(34,211,238,0.06)];
+    @apply rounded-xl border border-white/10 bg-white/[0.03] p-5 backdrop-blur-sm transition-[border-color,box-shadow] duration-200 hover:border-cyan-400/20 hover:shadow-[0_0_32px_rgba(34,211,238,0.06)] sm:p-7;
   }
 
   .bento-cell-featured {
-    @apply rounded-xl border border-cyan-500/25 bg-gradient-to-br from-cyan-500/12 via-blue-600/8 to-violet-600/5 p-7 backdrop-blur-sm;
+    @apply rounded-xl border border-cyan-500/25 bg-gradient-to-br from-cyan-500/12 via-blue-600/8 to-violet-600/5 p-5 backdrop-blur-sm sm:p-7;
   }
 
   .btn-ghost {
-    @apply inline-flex items-center rounded-full border border-white/20 px-8 py-3 text-sm font-normal tracking-wide text-neutral-200 transition-[border-color,box-shadow,color] duration-200 hover:border-cyan-400/50 hover:text-white hover:shadow-[0_0_32px_rgba(34,211,238,0.18)];
+    @apply inline-flex min-h-11 items-center justify-center rounded-full border border-white/20 px-6 py-3 text-sm font-normal tracking-wide text-neutral-200 transition-[border-color,box-shadow,color] duration-200 hover:border-cyan-400/50 hover:text-white hover:shadow-[0_0_32px_rgba(34,211,238,0.18)] sm:min-h-0 sm:px-8;
   }
 
   .accent-label {
@@ -68,7 +75,7 @@
   }
 
   .section-title {
-    @apply text-[clamp(1.75rem,3vw,2.5rem)] font-extrabold leading-tight tracking-tight text-neutral-50;
+    @apply text-[clamp(1.65rem,5vw,2.5rem)] font-extrabold leading-tight tracking-tight text-neutral-50;
   }
 
   .hero-badge {
@@ -92,7 +99,52 @@
   }
 
   .form-input {
-    @apply w-full rounded-lg border border-white/10 bg-white/[0.03] px-4 py-3 text-sm font-light text-neutral-200 placeholder:text-neutral-600 focus:border-cyan-400/30 focus:outline-none;
+    @apply w-full rounded-lg border border-white/10 bg-white/[0.03] px-4 py-3.5 text-base font-light text-neutral-200 placeholder:text-neutral-600 focus:border-cyan-400/30 focus:outline-none sm:py-3 sm:text-sm;
+  }
+
+  /* Mobile Navigation */
+  .nav-toggle {
+    @apply relative flex h-11 w-11 shrink-0 flex-col items-center justify-center gap-1.5 rounded-lg border border-white/10 bg-white/[0.03] transition-[border-color,background-color] duration-200 hover:border-cyan-400/30;
+  }
+
+  .nav-toggle-bar {
+    @apply block h-0.5 w-5 rounded-full bg-neutral-200 transition-transform duration-200;
+  }
+
+  .nav-toggle.is-open .nav-toggle-bar:nth-child(1) {
+    transform: translateY(8px) rotate(45deg);
+  }
+
+  .nav-toggle.is-open .nav-toggle-bar:nth-child(2) {
+    opacity: 0;
+  }
+
+  .nav-toggle.is-open .nav-toggle-bar:nth-child(3) {
+    transform: translateY(-8px) rotate(-45deg);
+  }
+
+  .mobile-nav-panel {
+    @apply max-h-[calc(100dvh-4rem)] overflow-y-auto border-t border-white/[0.06] bg-[#030308]/98 backdrop-blur-xl sm:max-h-[calc(100dvh-4.5rem)];
+  }
+
+  .mobile-nav-link {
+    @apply min-h-11 rounded-lg px-3 py-3 text-base font-light transition-colors active:bg-white/[0.04];
+  }
+
+  .mobile-nav-sublink {
+    @apply min-h-10 rounded-lg px-3 py-2.5 text-sm font-light text-neutral-400 transition-colors active:bg-white/[0.04];
+  }
+
+  .mobile-nav-details summary::-webkit-details-marker {
+    display: none;
+  }
+
+  .mobile-nav-details[open] .mobile-nav-chevron {
+    transform: rotate(180deg);
+  }
+
+  .mobile-nav-chevron {
+    transition: transform 0.15s ease;
   }
 }
 

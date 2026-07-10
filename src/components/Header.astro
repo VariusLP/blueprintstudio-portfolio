@@ -17,21 +17,32 @@ function isActive(href: string) {
 function isDocsActive() {
   return currentPath.startsWith('/docs');
 }
+
+const linkClass = (active: boolean) =>
+  active ? 'text-cyan-300/90' : 'text-neutral-500 hover:text-cyan-300/90';
+
+const mobileLinkClass = (active: boolean) =>
+  active ? 'text-cyan-300/90' : 'text-neutral-300';
 ---
 
-<header class="fixed inset-x-0 top-0 z-50 border-b border-white/[0.06] bg-[#030308]/70 backdrop-blur-xl">
-  <div class="mx-auto flex max-w-7xl items-center justify-between px-6 py-5 sm:px-8">
+<header
+  id="site-header"
+  class="fixed inset-x-0 top-0 z-50 border-b border-white/[0.06] bg-[#030308]/80 backdrop-blur-xl supports-[padding:max(0px)]:pt-[env(safe-area-inset-top)]"
+>
+  <div class="mx-auto flex max-w-7xl items-center justify-between gap-4 px-4 py-4 sm:px-8 sm:py-5">
     <a
       href={withBase('/')}
       class:list={[
-        'text-sm font-extrabold tracking-tight',
+        'shrink-0 text-sm font-extrabold tracking-tight sm:text-base',
         isActive('/') ? 'text-cyan-300/90' : 'text-white',
       ]}
     >
       BlueprintStudio
     </a>
-    <nav aria-label="Hauptnavigation">
-      <ul class="flex flex-wrap items-center justify-end gap-x-5 gap-y-2 sm:gap-x-6">
+
+    <!-- Desktop-Navigation (ab lg / Tablet quer & Desktop) -->
+    <nav class="hidden lg:block" aria-label="Hauptnavigation">
+      <ul class="flex items-center justify-end gap-x-6">
         {
           nav.map((item) =>
             item.children ? (
@@ -40,9 +51,7 @@ function isDocsActive() {
                   href={withBase(item.href)}
                   class:list={[
                     'text-sm font-light transition-colors',
-                    isDocsActive()
-                      ? 'text-cyan-300/90'
-                      : 'text-neutral-500 hover:text-cyan-300/90',
+                    linkClass(isDocsActive()),
                   ]}
                   aria-current={isDocsActive() ? 'page' : undefined}
                 >
@@ -58,7 +67,7 @@ function isDocsActive() {
                         <a
                           href={withBase(child.href)}
                           class:list={[
-                            'block px-4 py-2 text-sm font-light transition-colors',
+                            'block px-4 py-2.5 text-sm font-light transition-colors',
                             isActive(child.href)
                               ? 'text-cyan-300/90'
                               : 'text-neutral-400 hover:text-white',
@@ -77,10 +86,101 @@ function isDocsActive() {
                   href={withBase(item.href)}
                   class:list={[
                     'text-sm font-light transition-colors',
-                    isActive(item.href)
-                      ? 'text-cyan-300/90'
-                      : 'text-neutral-500 hover:text-cyan-300/90',
+                    linkClass(isActive(item.href)),
                   ]}
+                  aria-current={isActive(item.href) ? 'page' : undefined}
+                >
+                  {item.label}
+                </a>
+              </li>
+            ),
+          )
+        }
+      </ul>
+    </nav>
+
+    <!-- Hamburger (Handy & Tablet hochkant) -->
+    <button
+      type="button"
+      id="nav-toggle"
+      class="nav-toggle lg:hidden"
+      aria-expanded="false"
+      aria-controls="mobile-nav"
+      aria-label="Menü öffnen"
+    >
+      <span class="nav-toggle-bar" aria-hidden="true"></span>
+      <span class="nav-toggle-bar" aria-hidden="true"></span>
+      <span class="nav-toggle-bar" aria-hidden="true"></span>
+    </button>
+  </div>
+
+  <!-- Mobile-Menü -->
+  <div
+    id="mobile-nav"
+    class="mobile-nav-panel lg:hidden"
+    hidden
+    aria-hidden="true"
+  >
+    <nav aria-label="Mobile Navigation">
+      <ul class="space-y-1 px-4 pb-6 sm:px-8" role="list">
+        {
+          nav.map((item) =>
+            item.children ? (
+              <li>
+                <details class="mobile-nav-details" open={isDocsActive()}>
+                  <summary
+                    class:list={[
+                      'mobile-nav-link flex cursor-pointer list-none items-center justify-between',
+                      mobileLinkClass(isDocsActive()),
+                    ]}
+                  >
+                    <span>{item.label}</span>
+                    <svg
+                      class="mobile-nav-chevron h-4 w-4 shrink-0 text-neutral-500"
+                      viewBox="0 0 16 16"
+                      fill="none"
+                      aria-hidden="true"
+                    >
+                      <path
+                        d="M4 6l4 4 4-4"
+                        stroke="currentColor"
+                        stroke-width="1.5"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"></path>
+                    </svg>
+                  </summary>
+                  <ul class="mb-2 ml-3 space-y-1 border-l border-white/10 pl-4" role="list">
+                    <li>
+                      <a
+                        href={withBase(item.href)}
+                        class:list={[
+                          'mobile-nav-sublink block',
+                          mobileLinkClass(currentPath === '/docs' || currentPath === '/docs/'),
+                        ]}
+                      >
+                        Übersicht
+                      </a>
+                    </li>
+                    {
+                      item.children.map((child) => (
+                        <li>
+                          <a
+                            href={withBase(child.href)}
+                            class:list={['mobile-nav-sublink block', mobileLinkClass(isActive(child.href))]}
+                          >
+                            {child.label}
+                          </a>
+                        </li>
+                      ))
+                    }
+                  </ul>
+                </details>
+              </li>
+            ) : (
+              <li>
+                <a
+                  href={withBase(item.href)}
+                  class:list={['mobile-nav-link block', mobileLinkClass(isActive(item.href))]}
                   aria-current={isActive(item.href) ? 'page' : undefined}
                 >
                   {item.label}
@@ -93,3 +193,38 @@ function isDocsActive() {
     </nav>
   </div>
 </header>
+
+<script is:inline>
+  (function () {
+    const header = document.getElementById('site-header');
+    const toggle = document.getElementById('nav-toggle');
+    const panel = document.getElementById('mobile-nav');
+    if (!header || !toggle || !panel) return;
+
+    let isOpen = false;
+
+    function setOpen(open) {
+      isOpen = open;
+      toggle.setAttribute('aria-expanded', String(open));
+      toggle.setAttribute('aria-label', open ? 'Menü schließen' : 'Menü öffnen');
+      toggle.classList.toggle('is-open', open);
+      panel.hidden = !open;
+      panel.setAttribute('aria-hidden', String(!open));
+      document.body.classList.toggle('nav-open', open);
+    }
+
+    toggle.addEventListener('click', () => setOpen(!isOpen));
+
+    panel.querySelectorAll('a').forEach((link) => {
+      link.addEventListener('click', () => setOpen(false));
+    });
+
+    document.addEventListener('keydown', (event) => {
+      if (event.key === 'Escape' && isOpen) setOpen(false);
+    });
+
+    window.matchMedia('(min-width: 1024px)').addEventListener('change', (event) => {
+      if (event.matches && isOpen) setOpen(false);
+    });
+  })();
+</script>
