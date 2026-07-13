@@ -46,7 +46,7 @@ export const en: Translations = {
     name: 'BlueprintStudio',
     owner: 'Sascha Leitner',
     role: 'Full-Cycle Software & Solutions Developer',
-    tagline: 'From prototype to production-ready application',
+    tagline: 'From prototype to production-ready applications',
     intro:
       'Under the BlueprintStudio brand, I build tailored software solutions — from Unity tools and applications to feature-rich products. I focus on structured delivery, clear communication, and efficient AI-assisted development workflows.',
     why:
@@ -65,9 +65,9 @@ export const en: Translations = {
     summary:
       'As a Full-Cycle Software & Solutions Developer, I take client requirements from start to finish: requirements analysis, rapid prototyping, iterative implementation, and documented handover. My focus is Unity development, editor tools, and workflow automation that improves day-to-day productivity.',
     scope:
-      'I focus on technical implementation and system architecture. I do not offer graphic or UI design services, but I work closely with artists and designers whenever a project needs it.',
+      'I focus on technical implementation and system architecture. I do not offer graphic or UI design services, but I work closely with artists and designers whenever a project requires it.',
     education: [
-      'Business Start-up Programme (UGP) — ongoing since 07/2026, focused on market entry',
+      'Start-up Program (UGP) — ongoing since 07/2026, focused on market entry',
       'Diploma in Games Programming, SAE Vienna — 2023 to 2024',
       'Electrical engineering apprenticeship — 2016 to 2020',
     ],
@@ -285,13 +285,13 @@ export const en: Translations = {
     companyRegister: 'Company register',
     companyRegisterText: 'Not registered in the Austrian company register.',
     vat: 'VAT ID',
-    vatText: 'No VAT identification number (UID) on file.',
+    vatText: 'Not applicable.',
     privacy: 'Privacy / Web analytics',
     privacyText:
-      'This website uses Umami Analytics — a cookie-free, anonymised traffic measurement. No personal profiles are created and no data is shared with advertising networks. Analytics are accessible only to the operator of this website. Legal basis: legitimate interest pursuant to Art. 6(1)(f) GDPR (technical optimisation of the website).',
+      'This website uses Umami Analytics — a cookie-free, anonymised traffic measurement. No personal profiles are created, and no data is shared with third-party advertising networks. Analytics are accessible only to the operator of this website. Legal basis: legitimate interest pursuant to Art. 6(1)(f) GDPR (technical optimisation of the website).',
     liabilityContent: 'Liability for content',
     liabilityContentText:
-      'The content of this website was prepared with great care. However, no guarantee can be given for the accuracy, completeness, or timeliness of the information provided.',
+      'The content of this website has been prepared with the greatest possible care. However, no guarantee can be given for the accuracy, completeness, or timeliness of the information provided.',
     liabilityLinks: 'Liability for links',
     liabilityLinksText:
       'This website contains links to external third-party websites. I have no control over their content. The respective provider is always responsible for the content of linked pages.',
