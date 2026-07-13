@@ -147,32 +147,37 @@ export const de: Translations = {
       name: 'Project Slimmer',
       slug: 'project-slimmer',
       description:
-        'Optimierungs-Tool zur automatisierten Bereinigung von Unity-Projekten und Reduzierung von Build-Größen.',
+        'Editor-Tool zur Projektoptimierung — große Dateien finden, ungenutzte Assets erkennen, sicher bereinigen. v1.0, Asset-Store-bereit.',
       storeUrl: '#',
-      version: 'Unity 2021.3+',
+      version: 'v1.0 · Unity 2021.3+',
       summary:
-        'Analysiert ungenutzte Assets, redundante Referenzen und überdimensionierte Texturen. Automatisierte Reports und selektive Bereinigung.',
+        'Editor-Fenster unter Tools → Project Slimmer mit zwei Tabs: die 20 größten Dateien unter Assets/ und potenziell ungenutzte Assets per Dependency Graph. Confidence-Bewertung, Report-Export und sicheres Batch-Löschen.',
       features: [
-        'Scan nach unreferenzierten Assets',
-        'Texture- und Mesh-Optimierungsvorschläge',
-        'Build-Size-Report vor dem Release',
-        'Sichere Vorschau vor endgültigem Löschen',
+        'Tab Top 20 Largest Files — Scan unter Assets/, farbcodiert (>10 MB orange, >50 MB rot), Ping im Project-Fenster',
+        'Tab Potentially Unused Assets — Dependency Graph aus Szenen, Prefabs und ScriptableObjects',
+        'Confidence-System High / Medium / Low, Filter, Sortierung, Suche und Report-Export',
+        'Sicheres Batch-Löschen à 25 Dateien, Schutz für kritische Ordner (Resources, StreamingAssets, URP/HDRP)',
       ],
       sections: [
         {
           title: 'Installation',
           content:
-            'Editor-only Package aus dem Asset Store. Nach dem Import: Window → Blueprint → Project Slimmer öffnen.',
+            'Editor-only Package für den Unity Asset Store (v1.0, Release Candidate). Nach dem Import: Tools → Project Slimmer öffnen. Demo-Szene unter Assets/BlueprintStudio/ProjectSlimmer/DemoScene.unity.',
         },
         {
-          title: 'Workflow',
+          title: 'Oberfläche & Workflow',
           content:
-            'Zuerst Scan ausführen — das Tool listet unreferenzierte Assets, große Texturen und redundante Meshes. Vorschau-Modus zeigt Auswirkungen vor dem Löschen. Build-Size-Report vor jedem Release empfohlen.',
+            'Tab 1 — Top 20 Largest Files: Scannt alle Dateien unter Assets/ und listet die 20 größten farbcodiert (>10 MB orange, >50 MB rot). Klick auf einen Dateinamen pingt die Datei im Project-Fenster. Tab 2 — Potentially Unused Assets: Baut einen Dependency Graph aus Szenen, Prefabs und ScriptableObjects und listet Assets, die darin nicht vorkommen. Confidence-System (High / Medium / Low) mit Heuristiken, plus Filter, Sortierung, Suche und Export als Report.',
         },
         {
           title: 'Sicherheit',
           content:
-            'Keine automatische Löschung ohne Bestätigung. Backup oder Version Control vor Batch-Operationen. Ignore-Listen für Assets, die absichtlich unreferenziert sind.',
+            'Löschen erfolgt sicher in Batches à 25 Dateien über EditorApplication.delayCall. Kritische Ordner sind geschützt — u. a. Resources, StreamingAssets und URP/HDRP-Settings. Keine automatische Löschung ohne Bestätigung; Backup oder Version Control vor Batch-Operationen empfohlen.',
+        },
+        {
+          title: 'Architektur',
+          content:
+            'IMGUI (klassisches EditorWindow.OnGUI), Namespace BlueprintStudio.ProjectSlimmer, eigene Assembly Definition BlueprintStudio.ProjectSlimmer.Editor.asmdef. Ca. 1.550 Zeilen C#, ausführlich kommentiert.',
         },
       ],
     },
@@ -211,7 +216,8 @@ export const de: Translations = {
     {
       name: 'Project Slimmer',
       type: 'Asset Store',
-      description: 'Editor Extension zur Projekt-Optimierung und Build-Size-Reduktion.',
+      description:
+        'Editor Extension — große Dateien finden, ungenutzte Assets per Dependency Graph erkennen, sicher bereinigen (v1.0).',
       internalUrl: '/assets',
       tags: ['Unity', 'Editor Tool', 'Optimization'],
     },

@@ -146,32 +146,37 @@ export const en: Translations = {
       name: 'Project Slimmer',
       slug: 'project-slimmer',
       description:
-        'Optimisation tool for automated Unity project cleanup and build size reduction.',
+        'Editor tool for project optimisation — find large files, detect unused assets, clean up safely. v1.0, Asset Store ready.',
       storeUrl: '#',
-      version: 'Unity 2021.3+',
+      version: 'v1.0 · Unity 2021.3+',
       summary:
-        'Analyses unused assets, redundant references, and oversized textures. Automated reports and selective cleanup.',
+        'Editor window at Tools → Project Slimmer with two tabs: the 20 largest files under Assets/ and potentially unused assets via dependency graph. Confidence ratings, report export, and safe batch deletion.',
       features: [
-        'Scan for unreferenced assets',
-        'Texture and mesh optimisation suggestions',
-        'Build size report before release',
-        'Safe preview before permanent deletion',
+        'Top 20 Largest Files tab — scan under Assets/, colour-coded (>10 MB orange, >50 MB red), ping in Project window',
+        'Potentially Unused Assets tab — dependency graph from scenes, prefabs, and ScriptableObjects',
+        'Confidence system High / Medium / Low, plus filter, sort, search, and report export',
+        'Safe batch deletion in groups of 25, protection for critical folders (Resources, StreamingAssets, URP/HDRP)',
       ],
       sections: [
         {
           title: 'Installation',
           content:
-            'Editor-only package from the Asset Store. After import: open Window → Blueprint → Project Slimmer.',
+            'Editor-only package for the Unity Asset Store (v1.0, release candidate). After import: open Tools → Project Slimmer. Demo scene at Assets/BlueprintStudio/ProjectSlimmer/DemoScene.unity.',
         },
         {
-          title: 'Workflow',
+          title: 'Interface & workflow',
           content:
-            'Run a scan first — the tool lists unreferenced assets, large textures, and redundant meshes. Preview mode shows the impact before anything is deleted. A build size report is recommended before every release.',
+            'Tab 1 — Top 20 Largest Files: Scans all files under Assets/ and lists the 20 largest, colour-coded (>10 MB orange, >50 MB red). Click a filename to ping it in the Project window. Tab 2 — Potentially Unused Assets: Builds a dependency graph from scenes, prefabs, and ScriptableObjects and lists assets not referenced in that graph. Confidence system (High / Medium / Low) with heuristics, plus filter, sort, search, and report export.',
         },
         {
           title: 'Safety',
           content:
-            'Nothing is deleted automatically without your confirmation. Create a backup or use version control before batch operations. Ignore lists let you keep assets that are intentionally unreferenced.',
+            'Deletion runs safely in batches of 25 files via EditorApplication.delayCall. Critical folders are protected — including Resources, StreamingAssets, and URP/HDRP settings. Nothing is deleted without confirmation; backup or version control recommended before batch operations.',
+        },
+        {
+          title: 'Architecture',
+          content:
+            'IMGUI (classic EditorWindow.OnGUI), namespace BlueprintStudio.ProjectSlimmer, dedicated assembly definition BlueprintStudio.ProjectSlimmer.Editor.asmdef. Around 1,550 lines of C#, extensively commented.',
         },
       ],
     },
@@ -210,7 +215,8 @@ export const en: Translations = {
     {
       name: 'Project Slimmer',
       type: 'Asset Store',
-      description: 'Editor extension for project optimisation and build size reduction.',
+      description:
+        'Editor extension — find large files, detect unused assets via dependency graph, clean up safely (v1.0).',
       internalUrl: '/en/assets',
       tags: ['Unity', 'Editor Tool', 'Optimization'],
     },
