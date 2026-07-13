@@ -9,8 +9,8 @@ export const umamiWebsiteId =
 export const umamiScriptUrl =
   import.meta.env.PUBLIC_UMAMI_SCRIPT_URL ?? 'https://cloud.umami.is/script.js';
 
-export const githubUrl = 'https://github.com/VariusLP';
-export const githubHandle = 'VariusLP';
+export const githubUrl = 'https://github.com/BlueprintStudioDev';
+export const githubHandle = 'BlueprintStudioDev';
 
 export const impressumData = {
   owner: 'Sascha Leitner',

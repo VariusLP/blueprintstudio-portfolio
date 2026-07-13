@@ -234,10 +234,10 @@ export const de: Translations = {
       tags: ['RPG', 'Prototype', 'Game Design'],
     },
     {
-      name: 'VariusLP — GitHub',
+      name: 'BlueprintStudioDev — GitHub',
       type: 'Open Source',
       description: 'Unity-Skripte, Tool-Experimente und Referenzimplementierungen.',
-      url: 'https://github.com/VariusLP',
+      url: 'https://github.com/BlueprintStudioDev',
       tags: ['C#', 'Unity', 'GitHub'],
     },
   ],
