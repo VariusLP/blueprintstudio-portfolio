@@ -29,9 +29,14 @@ const p = t.docsPage;
                 </a>
               </h2>
               <p class="mt-4 text-sm font-light leading-relaxed text-neutral-500">{doc.summary}</p>
-              <a href={withBase(getDocSlugPath(lang, doc.slug))} class="btn-ghost mt-8">
-                {t.ui.openGuide}
-              </a>
+              <div class="mt-8 flex flex-wrap gap-3">
+                <a href={withBase(getDocSlugPath(lang, doc.slug))} class="btn-ghost">
+                  {t.ui.openGuide}
+                </a>
+                <a href={doc.storeUrl} class="btn-ghost" rel="noopener noreferrer">
+                  {t.ui.unityAssetStore}
+                </a>
+              </div>
             </li>
           ))
         }

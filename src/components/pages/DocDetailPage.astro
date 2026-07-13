@@ -25,6 +25,12 @@ const otherDocs = t.assets.filter((d) => d.slug !== doc.slug);
       <h1 id="doc-title" class="section-title">{doc.name}</h1>
       <p class="mt-6 text-sm font-light leading-relaxed text-neutral-400">{doc.summary}</p>
 
+      <div class="mt-8 flex flex-wrap gap-3">
+        <a href={doc.storeUrl} class="btn-ghost" rel="noopener noreferrer">
+          {t.ui.unityAssetStore}
+        </a>
+      </div>
+
       <div class="mt-16 space-y-6">
         {
           doc.sections.map((section) => (
