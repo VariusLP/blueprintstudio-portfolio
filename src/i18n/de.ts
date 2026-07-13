@@ -114,32 +114,37 @@ export const de: Translations = {
       name: 'SaveSystemPro',
       slug: 'savesystempro',
       description:
-        'Performante, modular aufgebaute Lösung zur effizienten Datenpersistenz in Unity.',
+        'Produktionsreifes Save/Load-System für Unity-Spiele — Multi-Slot, Backups, Profile und Runtime-Spawns. v1.0.0, Asset-Store-Paket.',
       storeUrl: '#',
-      version: 'Unity 2021.3+',
+      version: 'v1.0.0 · Unity 2021 LTS – Unity 6',
       summary:
-        'Flexibles Save/Load-System mit klarer API, modularer Serializer-Architektur und minimalem Runtime-Overhead.',
+        'Zentrale SaveManager-Instanz orchestriert Speichern, Laden, Backups, Profile und Runtime-Spawns. SaveableEntity + ISaveable, Serializer-Registry, Safe-Write-Pipeline und umfangreiche Editor-Tools.',
       features: [
-        'Modulare Serializer für unterschiedliche Datentypen',
-        'Asynchrones Speichern ohne Frame-Drops',
-        'Versionierung und Migration gespeicherter Daten',
-        'Editor-Integration zur Inspektion von Save-Slots',
+        'Multi-Slot, Autosave, QuickSave — Manifest, Thumbnails, Retention & Continue Policies',
+        'Safe Write Pipeline (Temp → Replace) + rotierende Backups (.bak1–.bak3) mit Fallback beim Laden',
+        'Multi-Scene, Multi-Profile, Runtime-Spawn-Persistenz via SaveableEntity & ISaveable',
+        'Erweiterbare Serializer-Registry, Pipeline-Hooks, Validatoren — 3 Demo-Szenen & UI-Samples',
       ],
       sections: [
         {
-          title: 'Installation',
+          title: 'Installation & Kompatibilität',
           content:
-            'Package über den Unity Asset Store importieren. Ab Unity 2021.3 LTS kompatibel. Nach dem Import erscheint das Tool unter Blueprint → SaveSystemPro im Editor-Menü.',
+            'Unity Asset Store-Paket (v1.0.0, Copyright 2026). Kompatibel mit Unity 2021 LTS, 2022 LTS und Unity 6 (6000). Namespace BlueprintStudio.SaveSystemPro, Assembly BlueprintStudio.SaveSystemPro — keine externen Package-Abhängigkeiten. Projektstruktur unter Assets/BlueprintStudio/SaveSystemPro/ (Runtime, Editor, Samples, Documentation).',
         },
         {
           title: 'Quick Start',
           content:
-            'Implementiere ISaveable auf deinen Datenklassen, registriere Serializer über SaveSystemConfig und rufe SaveManager.Save(slot) bzw. Load(slot) auf. Asynchrone Varianten vermeiden Frame-Spikes bei großen Datenmengen.',
+            'SaveManager in die Szene legen (eine Instanz pro Szene). SaveableEntity auf alle persistierbaren Objekte, optional SaveTransform für Position/Rotation/Scale. Eigene Logik via ISaveable (CaptureState / RestoreState). Runtime-Spawns: RuntimeSpawned + Prefab-Mapping im SaveManager. API: SaveManager.Instance.SetActiveSlot("slot1"); SaveManager.Instance.Save(); SaveManager.Instance.Load(); — plus HasSave(), GetLatestSlot() und weitere Hilfsmethoden.',
         },
         {
           title: 'Architektur',
           content:
-            'Modulare Serializer-Pipeline mit Versionierung. Jeder Save-Slot enthält Metadaten für Migration. Editor-Fenster zur Inspektion und zum Debuggen von Serialisierungsfehlern.',
+            'Kern ist der SaveManager als zentrale Save-Authority: Slots, Autosave, Backups, Profile, Export/Import und Metadaten. SaveableEntity markiert Objekte mit eindeutiger GUID; SaveScope steuert den Speicherort (Scene, Global, PlayerData, PersistentRuntime). Serializer-System über ISaveStateSerializer mit eingebauten Typen (Bool, Int, Float, String, Vector2/3, Quaternion, TransformState) — Registry auto-generiert via SerializerRegistryGenerator. Erweiterbar über ISaveValidator, IAutosaveGuard, ISavePipelineHook, ISaveEntityFilter und ISaveStorageProvider. Optional: GZip-Kompression und lokale Verschlüsselung.',
+        },
+        {
+          title: 'Editor-Tools & Demos',
+          content:
+            'Editor: SaveManagerEditor (Custom Inspector, Slot-Verwaltung, Thumbnails), SaveSystemProSaveBrowserWindow, SaveSystemProDiagnosticsWindow, SerializerRegistryGenerator und SaveSystemAutoSetup. Drei Demo-Szenen: Basic Demo (3 Slots, Player/Coins/Health), Runtime Spawn Demo (persistente Prefab-Spawns) und Advanced Safety Demo (Backup-Wiederherstellung). Zusätzliche UI-Samples: SaveLoadMenuUI, SaveLoadOverlayUI, SaveSlotPreviewDemoUI.',
         },
       ],
     },
@@ -209,7 +214,8 @@ export const de: Translations = {
     {
       name: 'SaveSystemPro',
       type: 'Asset Store',
-      description: 'Modulares Save/Load-System für Unity — flexible API und Editor-Integration.',
+      description:
+        'Produktionsreifes Save/Load-System — Multi-Slot, Backups, Profile, Runtime-Spawns und Editor-Tools (v1.0.0).',
       internalUrl: '/assets',
       tags: ['Unity', 'C#', 'Save System'],
     },
